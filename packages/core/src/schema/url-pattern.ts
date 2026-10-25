@@ -29,7 +29,20 @@ export function compileUrlPattern(pattern: string): { regex: RegExp; paramNames:
 
 		const name = match[1];
 		paramNames.push(name);
-		regexSource += "([^/]+)";
+		if (name === "path") {
+			if (
+				paramNames.length !== 1 ||
+				pattern.slice(matchIndex + match[0].length) !== "" ||
+				!literal.endsWith("/")
+			) {
+				throw new Error(
+					"The {path} placeholder must be the only placeholder and occupy the final path segment",
+				);
+			}
+			regexSource += "([^/]+(?:/[^/]+)*)";
+		} else {
+			regexSource += "([^/]+)";
+		}
 		previousIndex = matchIndex + match[0].length;
 	}
 

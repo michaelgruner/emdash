@@ -25,6 +25,7 @@
  */
 
 import type { ContentSeo } from "./database/repositories/types.js";
+import { decodeSlugPath } from "./hierarchy/paths.js";
 import {
 	getFallbackChain,
 	getI18nConfig,
@@ -1944,7 +1945,7 @@ export async function resolveEmDashPath<T = Record<string, unknown>>(
 		}
 
 		// Look up entry by slug (most common pattern)
-		const slug = params.slug;
+		const slug = params.path !== undefined ? decodeSlugPath(params.path) : params.slug;
 		if (!slug) continue;
 
 		const { entry } = await getEmDashEntry<string, T>(pattern.slug, slug);

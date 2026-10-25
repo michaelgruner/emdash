@@ -195,6 +195,7 @@ A collection requires `slug`, `label`, and `fields`:
 | `admin.quickCreate` | `boolean` | Whether the dashboard shows a "new entry" quick action for this collection; defaults to `true` |
 | `supports` | `string[]` | Any of `drafts`, `revisions`, `preview`, `scheduling`, `search`, and `seo` |
 | `urlPattern` | `string` | Public pattern such as `/posts/{slug}`, with at most one placeholder per path segment |
+| `hierarchyRelation` | `string` | Self-relation defining parentage for [hierarchical collection URLs](/guides/relations/#hierarchical-collection-urls); requires revisions and a pattern ending in `/{path}` |
 | `routable` | `boolean` | Whether published entries require a slug; defaults to `true` |
 | `hidden` | `boolean` | Hides the generated sidebar link, command palette link, and dashboard quick action; the collection stays reachable by URL and API |
 | `sortOrder` | `number` | Explicit admin-sidebar position; ordered collections come first, ascending |

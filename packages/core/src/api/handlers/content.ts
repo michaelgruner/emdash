@@ -43,6 +43,7 @@ import { UserRepository } from "../../database/repositories/user.js";
 import { withTransaction } from "../../database/transaction.js";
 import type { Database } from "../../database/types.js";
 import { validateIdentifier } from "../../database/validate.js";
+import { publishHierarchicalContent } from "../../hierarchy/publish.js";
 import { getI18nConfig, isI18nEnabled, resolveConfiguredLocale } from "../../i18n/config.js";
 import { interpolateUrlPattern } from "../../i18n/resolve.js";
 import {
@@ -256,17 +257,24 @@ async function collectionHasSeo(db: Kysely<Database>, collection: string): Promi
 async function getCollectionPublishConfig(
 	db: Kysely<Database>,
 	collection: string,
-): Promise<{ supportsRevisions: boolean; routable: boolean }> {
+): Promise<{
+	supportsRevisions: boolean;
+	routable: boolean;
+	hierarchyRelation: string | null;
+	urlPattern: string | null;
+}> {
 	return requestCached(`collectionPublishConfig:${collection}`, async () => {
 		const row = await db
 			.selectFrom("_emdash_collections")
-			.select(["supports", "routable"])
+			.select(["supports", "routable", "hierarchy_relation", "url_pattern"])
 			.where("slug", "=", collection)
 			.executeTakeFirst();
 		const supports: unknown = row?.supports ? JSON.parse(row.supports) : [];
 		return {
 			supportsRevisions: Array.isArray(supports) && supports.includes("revisions"),
 			routable: row?.routable !== 0,
+			hierarchyRelation: row?.hierarchy_relation ?? null,
+			urlPattern: row?.url_pattern ?? null,
 		};
 	});
 }
@@ -1985,6 +1993,9 @@ export async function handleContentDelete(
 			data: { deleted: true, id: result.id },
 		};
 	} catch (error) {
+		if (error instanceof EmDashValidationError) {
+			return { success: false, error: { code: "VALIDATION_ERROR", message: error.message } };
+		}
 		console.error("Content delete error:", error);
 		return {
 			success: false,
@@ -2438,10 +2449,44 @@ export async function handleContentPublish(
 		expectedScheduledAt?: string;
 		_rev?: string;
 		currentTime?: Date;
+		actor?: { id: string; role: number };
 	} = {},
 ): Promise<ApiResult<ContentResponse>> {
 	try {
 		const expectedRevision = decodeRevisionPrecondition(options._rev);
+		const hierarchyConfig = await getCollectionPublishConfig(db, collection);
+		if (hierarchyConfig.hierarchyRelation) {
+			const existing = await new ContentRepository(db).findByIdOrSlug(collection, id);
+			if (!existing)
+				return { success: false, error: { code: "NOT_FOUND", message: "Content not found" } };
+			const draft = existing.draftRevisionId
+				? await new RevisionRepository(db).findById(existing.draftRevisionId)
+				: null;
+			if (existing.translationGroup) {
+				const valid = await validateStagedReferences(
+					db,
+					collection,
+					readStagedReferences(draft?.data) ?? {},
+					existing.translationGroup,
+					readStagedReferenceBaselines(draft?.data),
+				);
+				if (!valid.success) return valid;
+			}
+			const item = await publishHierarchicalContent(
+				db,
+				collection,
+				existing,
+				{
+					hierarchyRelation: hierarchyConfig.hierarchyRelation,
+					urlPattern: hierarchyConfig.urlPattern,
+				},
+				{ ...options, expectedRevision },
+			);
+			invalidateRedirectCache();
+			after(() => publishRedirectChanges(db));
+			await hydrateSeo(db, collection, item, await collectionHasSeo(db, collection));
+			return { success: true, data: { item, _rev: encodeRev(item) } };
+		}
 		let redirectChanged = false;
 		const item = await withTransaction(db, async (trx) => {
 			const repo = new ContentRepository(trx);

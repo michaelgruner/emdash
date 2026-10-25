@@ -95,6 +95,7 @@ export interface SeedCollection {
 	admin?: CollectionAdminConfig;
 	supports?: ("drafts" | "revisions" | "preview" | "scheduling" | "search" | "seo")[];
 	urlPattern?: string;
+	hierarchyRelation?: string;
 	/** Require a slug before an entry can be published. Defaults to true. */
 	routable?: boolean;
 	/**

@@ -1,3 +1,5 @@
+import { getLocaleDir, resolveLocale } from "@emdash-cms/admin/locales";
+import { Permissions } from "@emdash-cms/auth";
 /**
  * EmDashRuntime - Core runtime for EmDash CMS
  *
@@ -6,9 +8,6 @@
  *
  * Created once per worker lifetime, cached and reused across requests.
  */
-
-import { getLocaleDir, resolveLocale } from "@emdash-cms/admin/locales";
-import { Permissions } from "@emdash-cms/auth";
 import type { Element } from "@emdash-cms/blocks";
 import {
 	normalizePluginPagePath,
@@ -75,6 +74,8 @@ import type {
 	ContentDateField,
 } from "./database/repositories/types.js";
 import type { ImageValue } from "./fields/types.js";
+import { validateSlugSegment } from "./hierarchy/paths.js";
+import { resolveDraftHierarchySlug } from "./hierarchy/publish.js";
 import { getI18nConfig, resolveContentCreateLocale } from "./i18n/config.js";
 import { repairLocaleCasing } from "./i18n/repair-locale-casing.js";
 import { warnAboutUnconfiguredTaxonomyLocales } from "./i18n/taxonomy-locale-diagnostic.js";
@@ -148,6 +149,7 @@ import { isMissingTableError } from "./utils/db-errors.js";
 import { hashString } from "./utils/hash.js";
 import { createInitLock, type InitLock, initWithLock } from "./utils/init-lock.js";
 import { createSingleFlightCache, singleFlightCached } from "./utils/single-flight-cache.js";
+import { slugify } from "./utils/slugify.js";
 import { COMMIT, VERSION } from "./version.js";
 
 const LEADING_SLASH_PATTERN = /^\//;
@@ -306,6 +308,7 @@ const DRAFT_ONLY_UPDATE_KEYS = new Set([
 	"slug",
 	"locale",
 	"skipRevision",
+	"slugSegment",
 	"references",
 	"actor",
 	"migrateBlocks",
@@ -3446,6 +3449,7 @@ export class EmDashRuntime {
 					...r.data,
 					item: {
 						...item,
+						...(typeof revision.data._slug === "string" ? { draftSlug: revision.data._slug } : {}),
 						...(options.includeStagedSlug && typeof revision.data._slug === "string"
 							? { slug: revision.data._slug }
 							: {}),
@@ -3470,6 +3474,7 @@ export class EmDashRuntime {
 			data: Record<string, unknown>;
 			seo?: ContentWriteInput["seo"];
 			slug?: string | null;
+			slugSegment?: string;
 			status?: string;
 			authorId?: string;
 			bylines?: Array<{ bylineId: string; roleLabel?: string | null }>;
@@ -3548,6 +3553,34 @@ export class EmDashRuntime {
 		const collectionInfo = await this.schemaRegistry
 			.getCollectionWithFields(collection)
 			.catch(() => null);
+
+		if (collectionInfo?.hierarchyRelation) {
+			try {
+				const segment = validateSlugSegment(
+					body.slugSegment ??
+						body.slug?.split("/").at(-1) ??
+						slugify(typeof body.data.title === "string" ? body.data.title : ""),
+				);
+				const slug = await resolveDraftHierarchySlug(
+					this.db,
+					collection,
+					collectionInfo.hierarchyRelation,
+					null,
+					segment,
+					body.references,
+					locale,
+				);
+				body = { ...body, slug };
+			} catch (error) {
+				return {
+					success: false as const,
+					error: {
+						code: "VALIDATION_ERROR",
+						message: error instanceof Error ? error.message : "Invalid hierarchical URL",
+					},
+				};
+			}
+		}
 
 		// Run beforeSave hooks (trusted plugins)
 		let processedData = body.data;
@@ -3638,8 +3671,12 @@ export class EmDashRuntime {
 			replaceBlocks: _discardedReplaceBlocks,
 			...contentBody
 		} = body;
+		const publishHierarchy = Boolean(
+			collectionInfo?.hierarchyRelation && contentBody.status === "published",
+		);
 		const result = await handleContentCreate(this.db, collection, {
 			...contentBody,
+			...(publishHierarchy ? { status: "draft" } : {}),
 			data: processedData,
 			locale,
 			authorId: body.authorId,
@@ -3661,6 +3698,9 @@ export class EmDashRuntime {
 			);
 		}
 
+		if (publishHierarchy && result.success) {
+			return this.handleContentPublish(collection, result.data.item.id, { actor });
+		}
 		return result;
 	}
 
@@ -3670,6 +3710,7 @@ export class EmDashRuntime {
 		body: {
 			data?: Record<string, unknown>;
 			slug?: string | null;
+			slugSegment?: string;
 			status?: string;
 			authorId?: string | null;
 			bylines?: Array<{ bylineId: string; roleLabel?: string | null }>;
@@ -3736,7 +3777,10 @@ export class EmDashRuntime {
 		// A save carrying only a reference selection reaches the draft merge without any
 		// data, so it needs the collection loaded just the same.
 		const collectionInfo =
-			bodyWithoutRev.data || bodyWithoutRev.references
+			bodyWithoutRev.data ||
+			bodyWithoutRev.references ||
+			bodyWithoutRev.slug !== undefined ||
+			body.slugSegment !== undefined
 				? await this.schemaRegistry.getCollectionWithFields(collection).catch(() => null)
 				: null;
 		const knownFieldSlugs = new Set((collectionInfo?.fields ?? []).map((f) => f.slug));
@@ -3860,7 +3904,12 @@ export class EmDashRuntime {
 		// Draft data lives only in the revisions table.
 		let usesDraftRevisions = false;
 		let draftStorageChanged = false;
-		if (processedData || bodyWithoutRev.references) {
+		if (
+			processedData ||
+			bodyWithoutRev.references ||
+			bodyWithoutRev.slug !== undefined ||
+			body.slugSegment !== undefined
+		) {
 			if (collectionInfo?.supports?.includes("revisions")) {
 				usesDraftRevisions = true;
 
@@ -3956,7 +4005,41 @@ export class EmDashRuntime {
 					const mergedData = collectionInfo?.fields
 						? keepKnownFields({ ...baseData, ...attemptData }, knownFieldSlugs)
 						: { ...baseData, ...attemptData };
-					if (bodyWithoutRev.slug !== undefined) {
+					if (
+						collectionInfo.hierarchyRelation &&
+						(body.slugSegment !== undefined ||
+							bodyWithoutRev.slug !== undefined ||
+							bodyWithoutRev.references)
+					) {
+						try {
+							const segment = validateSlugSegment(
+								body.slugSegment ??
+									(
+										bodyWithoutRev.slug ??
+										(typeof baseData._slug === "string" ? baseData._slug : existing.slug)
+									)
+										?.split("/")
+										.at(-1) ??
+									"",
+							);
+							mergedData._slug = await resolveDraftHierarchySlug(
+								this.db,
+								collection,
+								collectionInfo.hierarchyRelation,
+								existing,
+								segment,
+								bodyWithoutRev.references,
+							);
+						} catch (error) {
+							return {
+								success: false as const,
+								error: {
+									code: "VALIDATION_ERROR",
+									message: error instanceof Error ? error.message : "Invalid hierarchical URL",
+								},
+							};
+						}
+					} else if (bodyWithoutRev.slug !== undefined) {
 						mergedData._slug = bodyWithoutRev.slug;
 					}
 					if (stagedReferences) {
@@ -4644,6 +4727,7 @@ export class EmDashRuntime {
 		} = options;
 		const result = await handleContentPublish(this.db, collection, id, {
 			...handlerOptions,
+			actor: options.actor,
 			_rev: policy.revision,
 		});
 		if (result.success && result.data) {

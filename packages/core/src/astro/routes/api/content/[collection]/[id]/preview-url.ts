@@ -66,7 +66,7 @@ export const POST: APIRoute = async ({ params, request, locals }) => {
 		const result = await emdash.handleContentGet(collection, id);
 		if (!result.success) return unwrapResult(result);
 		entryLocale = result.data?.item?.locale ?? null;
-		entrySlug = result.data?.item?.slug ?? null;
+		entrySlug = result.data?.item?.draftSlug ?? result.data?.item?.slug ?? null;
 	}
 
 	// Parse request body

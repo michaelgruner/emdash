@@ -230,6 +230,7 @@ export const contentCreateBody = z
 	.object({
 		data: z.record(z.string(), z.unknown()),
 		slug: z.string().nullish(),
+		slugSegment: z.string().min(1).optional(),
 		status: z.enum(["draft"]).optional(),
 		bylines: z.array(contentBylineInputSchema).optional(),
 		locale: localeCode.optional(),
@@ -254,6 +255,7 @@ export const contentUpdateBody = z
 	.object({
 		data: z.record(z.string(), z.unknown()).optional(),
 		slug: z.string().nullish(),
+		slugSegment: z.string().min(1).optional(),
 		status: z.enum(["draft"]).optional(),
 		authorId: z.string().nullish(),
 		bylines: z.array(contentBylineInputSchema).optional(),

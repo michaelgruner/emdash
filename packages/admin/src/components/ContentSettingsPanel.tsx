@@ -1082,9 +1082,21 @@ export const ContentSettingsPanel = React.memo(function ContentSettingsPanel({
 						</Text>
 						<div className="grid gap-4">
 							<Input
-								label={t`Slug`}
-								value={slug}
-								onChange={(event) => onSlugChange(event.target.value)}
+								label={
+									manifest?.collections[collection]?.hierarchyRelation ? t`URL segment` : t`Slug`
+								}
+								value={
+									manifest?.collections[collection]?.hierarchyRelation
+										? (slug.split("/").at(-1) ?? "")
+										: slug
+								}
+								onChange={(event) => {
+									const prefix =
+										manifest?.collections[collection]?.hierarchyRelation && slug.includes("/")
+											? slug.slice(0, slug.lastIndexOf("/") + 1)
+											: "";
+									onSlugChange(`${prefix}${event.target.value}`);
+								}}
 								placeholder="my-post-slug"
 							/>
 							{contentLocale ? (

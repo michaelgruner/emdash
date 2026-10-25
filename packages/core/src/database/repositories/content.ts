@@ -4,6 +4,7 @@ import { ulid } from "ulidx";
 import type { ContentFieldFilterValue, ContentFieldFilters } from "../../content-list-query.js";
 import { keepKnownFields, staleStoredKeys } from "../../content/known-fields.js";
 import { normalizeExplicitDatetime } from "../../datetime-normalization.js";
+import { assertHierarchyRemovable, hierarchyRemovalGuard } from "../../hierarchy/removal.js";
 import { getLocaleCandidates } from "../../i18n/config.js";
 import { canonicalLocaleColumn, localeMatches, localeOrder } from "../../i18n/query.js";
 import { invalidateCollectionCache } from "../../object-cache/index.js";
@@ -1672,6 +1673,7 @@ export class ContentRepository {
 	 */
 	async delete(type: string, id: string): Promise<boolean> {
 		const tableName = getTableName(type);
+		await assertHierarchyRemovable(this.db, type, id);
 		const now = new Date().toISOString();
 
 		const result = await sql`
@@ -1679,6 +1681,7 @@ export class ContentRepository {
 			SET deleted_at = ${now}
 			WHERE id = ${id}
 			AND deleted_at IS NULL
+			AND ${hierarchyRemovalGuard(type, id)}
 		`.execute(this.db);
 
 		const changed = (result.numAffectedRows ?? 0n) > 0n;
@@ -2792,6 +2795,7 @@ export class ContentRepository {
 		draftFromLive = true,
 	): Promise<ContentItem> {
 		const tableName = getTableName(type);
+		await assertHierarchyRemovable(this.db, type, id);
 		const now = new Date().toISOString();
 
 		const existing = await this.findById(type, id);
@@ -2830,6 +2834,7 @@ export class ContentRepository {
 					version = version + 1
 				WHERE id = ${id}
 				AND deleted_at IS NULL
+				AND ${hierarchyRemovalGuard(type, id)}
 				AND version = ${existing.version}
 				AND updated_at = ${existing.updatedAt}
 				AND status = ${existing.status}

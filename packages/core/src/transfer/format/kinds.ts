@@ -181,6 +181,7 @@ export const collectionRecordSchema = z.strictObject({
 	searchConfig: jsonValue.optional(),
 	hasSeo: z.boolean(),
 	urlPattern: shortString.optional(),
+	hierarchyRelation: identifierSchema.optional(),
 	commentsEnabled: z.boolean().optional(),
 	commentsModeration: shortString.optional(),
 	commentsClosedAfterDays: integer.optional(),

@@ -40,6 +40,7 @@ export interface ContentItem {
 	id: string;
 	type: string;
 	slug: string | null;
+	draftSlug?: string;
 	status: string;
 	locale: string;
 	translationGroup: string | null;

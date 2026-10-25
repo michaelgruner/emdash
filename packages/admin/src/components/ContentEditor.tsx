@@ -555,7 +555,7 @@ export function ContentEditor({
 		setPendingEditorDraftPatch(null);
 		setHasAppliedEditorDraftPatch(false);
 	}, [editorIdentity]);
-	const [slug, setSlug] = React.useState(item?.slug || "");
+	const [slug, setSlug] = React.useState(item?.draftSlug ?? item?.slug ?? "");
 	const [slugTouched, setSlugTouched] = React.useState(!!item?.slug);
 	const [status, setStatus] = React.useState(item?.status || "draft");
 	const resolvedItemBylines = resolveEditorBylines(item);
@@ -668,7 +668,7 @@ export function ContentEditor({
 	const [lastSavedData, setLastSavedData] = React.useState<string>(
 		serializeEditorState({
 			data: item?.data || {},
-			slug: item?.slug || "",
+			slug: item?.draftSlug ?? item?.slug ?? "",
 			bylines: resolvedItemBylines.explicitCredits,
 		}),
 	);
@@ -695,7 +695,7 @@ export function ContentEditor({
 	if (item && editorIdentity !== previousEditorIdentity) {
 		setPreviousEditorIdentity(editorIdentity);
 		setFormData(item.data);
-		setSlug(item.slug || "");
+		setSlug(item.draftSlug ?? item.slug ?? "");
 		setSlugTouched(!!item.slug);
 		setStatus(item.status);
 		const nextBylines = resolveEditorBylines(item).explicitCredits;
@@ -703,7 +703,7 @@ export function ContentEditor({
 		setLastSavedData(
 			serializeEditorState({
 				data: item.data,
-				slug: item.slug || "",
+				slug: item.draftSlug ?? item.slug ?? "",
 				bylines: nextBylines,
 			}),
 		);
@@ -755,7 +755,7 @@ export function ContentEditor({
 				(!isPublishingRef.current && !autosaveJustCompleted && !hasSaveConflictRef.current)
 			) {
 				setFormData(item.data);
-				setSlug(item.slug || "");
+				setSlug(item.draftSlug ?? item.slug ?? "");
 				setSlugTouched(!!item.slug);
 				setInternalBylines(nextBylines);
 				setBylinesTouched(false);
@@ -763,7 +763,7 @@ export function ContentEditor({
 			setLastSavedData(
 				serializeEditorState({
 					data: item.data,
-					slug: item.slug || "",
+					slug: item.draftSlug ?? item.slug ?? "",
 					bylines: nextBylines,
 				}),
 			);
@@ -790,6 +790,7 @@ export function ContentEditor({
 		itemDataString,
 		itemBylinesString,
 		item?.slug,
+		item?.draftSlug,
 		item?.status,
 		item?.references,
 		item?.draftRevisionId,

@@ -88,7 +88,11 @@ export function contentUrl(
 	// a slug that happens to contain `{year}`-style text stays untouched.
 	let pattern = urlPattern && applyDateTokens(urlPattern, options?.date);
 	if (pattern && options?.id) pattern = pattern.replaceAll("{id}", options.id);
-	const path = pattern ? pattern.replaceAll("{slug}", safe) : `/${collection}/${safe}`;
+	const path = pattern
+		? pattern
+				.replaceAll("{slug}", safe)
+				.replaceAll("{path}", safe.split("/").map(encodeURIComponent).join("/"))
+		: `/${collection}/${safe}`;
 	const { locale, i18n } = options ?? {};
 	const shouldPrefix =
 		locale && i18n && (locale !== i18n.defaultLocale || i18n.prefixDefaultLocale === true);

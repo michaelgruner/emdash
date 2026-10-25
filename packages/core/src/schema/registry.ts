@@ -21,6 +21,7 @@ import {
 import { withTransaction } from "../database/transaction.js";
 import type { CollectionTable, Database, FieldTable } from "../database/types.js";
 import { validateIdentifier } from "../database/validate.js";
+import { getI18nConfig } from "../i18n/config.js";
 import {
 	canResumeMediaUsageCollectionCapture,
 	findResumableMediaUsageCollectionCaptureId,
@@ -263,6 +264,7 @@ export async function buildSeedCollectionCaptureFingerprint(
 				commentsEnabled: input.commentsEnabled ?? false,
 				...(input.editLocking === false ? { editLocking: false } : {}),
 				urlPattern: input.urlPattern ?? null,
+				...(input.hierarchyRelation ? { hierarchyRelation: input.hierarchyRelation } : {}),
 				routable: input.routable ?? true,
 			},
 			fields: definitions,
@@ -518,6 +520,7 @@ export class SchemaRegistry {
 		// Validate slug
 		this.validateSlug(input.slug, "collection");
 		this.validateUrlPattern(input.urlPattern);
+		this.validateHierarchyConfiguration(input);
 		if (RESERVED_COLLECTION_SLUGS.includes(input.slug)) {
 			throw new SchemaError(`Collection slug "${input.slug}" is reserved`, "RESERVED_SLUG");
 		}
@@ -590,6 +593,7 @@ export class SchemaRegistry {
 				comments_enabled: input.commentsEnabled ? 1 : 0,
 				edit_locking: input.editLocking === false ? 0 : 1,
 				url_pattern: input.urlPattern ?? null,
+				hierarchy_relation: input.hierarchyRelation ?? null,
 			};
 
 			if (capture.captureRequired) {
@@ -644,6 +648,7 @@ export class SchemaRegistry {
 	): Promise<void> {
 		this.validateSlug(input.slug, "collection");
 		this.validateUrlPattern(input.urlPattern);
+		this.validateHierarchyConfiguration(input);
 		if (RESERVED_COLLECTION_SLUGS.includes(input.slug)) {
 			throw new SchemaError(`Collection slug "${input.slug}" is reserved`, "RESERVED_SLUG");
 		}
@@ -755,6 +760,7 @@ export class SchemaRegistry {
 					comments_enabled: input.commentsEnabled ? 1 : 0,
 					edit_locking: input.editLocking === false ? 0 : 1,
 					url_pattern: input.urlPattern ?? null,
+					hierarchy_relation: input.hierarchyRelation ?? null,
 				};
 				const rows = fieldRows.map((row) => ({
 					...row,
@@ -1087,6 +1093,18 @@ export class SchemaRegistry {
 			}
 			if (input.urlPattern !== existingRow.url_pattern) this.validateUrlPattern(input.urlPattern);
 			const existing = this.mapCollectionRow(existingRow);
+			this.validateHierarchyConfiguration({ ...existing, ...input });
+			if (
+				input.hierarchyRelation !== undefined &&
+				input.hierarchyRelation !== existingRow.hierarchy_relation
+			) {
+				const entries = await sql`SELECT id FROM ${sql.ref(`ec_${slug}`)} LIMIT 1`.execute(trx);
+				if (entries.rows.length > 0)
+					throw new SchemaError(
+						"Use the explicit hierarchy activation operation for a collection containing content",
+						"INVALID_HIERARCHY",
+					);
+			}
 			await this.validateTitleDateFields(
 				existing.id,
 				slug,
@@ -1105,6 +1123,8 @@ export class SchemaRegistry {
 			if (input.admin !== undefined) updates.admin_config = JSON.stringify(input.admin);
 			if (input.supports !== undefined) updates.supports = JSON.stringify(input.supports);
 			if (input.urlPattern !== undefined) updates.url_pattern = input.urlPattern;
+			if (input.hierarchyRelation !== undefined)
+				updates.hierarchy_relation = input.hierarchyRelation;
 			if (input.routable !== undefined) updates.routable = input.routable ? 1 : 0;
 			if (input.hasSeo !== undefined) {
 				updates.has_seo = input.hasSeo ? 1 : 0;
@@ -2363,6 +2383,31 @@ export class SchemaRegistry {
 		}
 	}
 
+	private validateHierarchyConfiguration(input: {
+		hierarchyRelation?: string | null;
+		urlPattern?: string | null;
+		supports?: readonly string[];
+	}): void {
+		if (!input.hierarchyRelation) return;
+		if (
+			!SCHEMA_SLUG_PATTERN.test(input.hierarchyRelation) ||
+			input.hierarchyRelation.length > MAX_SCHEMA_SLUG_LENGTH
+		)
+			throw new SchemaError("Invalid hierarchy relation slug", "INVALID_HIERARCHY");
+		if (!input.urlPattern?.endsWith("/{path}") || !input.supports?.includes("revisions")) {
+			throw new SchemaError(
+				"Hierarchy requires revisions and a URL pattern ending in /{path}",
+				"INVALID_HIERARCHY",
+			);
+		}
+		if ((getI18nConfig()?.locales.length ?? 1) > 1) {
+			throw new SchemaError(
+				"Hierarchical collections currently support one content locale",
+				"INVALID_HIERARCHY",
+			);
+		}
+	}
+
 	private validateUrlPattern(urlPattern: string | null | undefined): void {
 		if (!urlPattern) return;
 		try {
@@ -2472,6 +2517,7 @@ export class SchemaRegistry {
 			titleField: row.title_field ?? undefined,
 			dateField: row.date_field ?? undefined,
 			urlPattern: row.url_pattern ?? undefined,
+			hierarchyRelation: row.hierarchy_relation ?? undefined,
 			routable: row.routable !== 0,
 			hidden: row.hidden === 1,
 			sortOrder: row.sort_order ?? undefined,

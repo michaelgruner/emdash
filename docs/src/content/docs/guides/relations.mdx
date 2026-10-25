@@ -100,6 +100,70 @@ Add a reference field on the other end of the relationship. A field that picks t
 lists the entries that link to this one, so an author editing a page sees the posts that point at
 it, and can change that set from either end.
 
+## Hierarchical collection URLs
+
+A collection can use a self-relation to derive its public URLs. Each entry keeps its complete
+canonical path in `slug`; the admin's **URL segment** control edits only the final segment.
+For example, two products can each have a `getting-started` child, served at
+`/docs/camera/getting-started` and `/docs/encoder/getting-started`.
+
+Enable revisions on the collection, create a self-relation with `maxParentsPerChild: 1`, and
+add reference fields for its parent and child selections. Configure the collection with the
+relation slug and a URL pattern whose final segment is `{path}`.
+
+The following collection schema properties select a relation named `docs_navigation`.
+
+```json
+{
+  "hierarchyRelation": "docs_navigation",
+  "urlPattern": "/docs/{path}"
+}
+```
+
+For an existing collection, send these two properties together to
+`PUT /_emdash/api/schema/collections/docs`. Activation converts existing paths and creates
+permanent redirects while preserving unpublished body edits. Resolve unpublished URL or
+hierarchy edits before activation. Other collection settings must be updated separately.
+A seed can declare the same properties on a new collection; content slugs in that seed must
+already contain their canonical paths.
+
+Serve the collection through a catch-all Astro route. Decode each segment once and pass the
+complete slug to the ordinary content query.
+
+The following route loads hierarchical Docs entries.
+
+```astro title="src/pages/docs/[...slug].astro"
+---
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import { decodeSlugPath } from "emdash/urls";
+
+const slug = decodeSlugPath(Astro.params.slug);
+if (!slug) return new Response("Not found", { status: 404 });
+const { entry } = await getEmDashEntry("docs", slug);
+if (!entry) return new Response("Not found", { status: 404 });
+---
+<h1>{entry.data.title}</h1>
+<PortableText value={entry.data.content} />
+```
+
+Use `encodeSlugPath(entry.id)` when constructing a link manually. Native content links,
+previews, and sitemaps use the collection's `{path}` pattern. The existing `{slug}` placeholder
+encodes a slug as one URL segment.
+
+Save a new parent selection or URL segment as a draft, then publish it. Publication changes the
+entry and its descendants together, keeps the selected child order, and creates native permanent
+redirects from the previous paths. Earlier automatic redirects point directly to the latest path.
+Existing links in rich text and menus keep their stored href and follow those redirects.
+
+Publication rejects cycles, duplicate canonical paths, published children beneath unpublished
+parents, and descendants with pending URL or hierarchy changes. Body-only descendant drafts
+remain unpublished. Moving another author's published descendants requires permission to publish
+those entries. Move or unpublish published descendants before unpublishing or deleting a parent.
+
+Hierarchical collections support one content locale. The relation must continue to allow exactly
+one parent per child and cannot be deleted while the collection uses it.
+
 ## Read links in a template
 
 Reference fields are not part of an entry's `data`. Name the fields a page renders in the

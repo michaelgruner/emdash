@@ -339,6 +339,7 @@ export interface EmDashHandlers {
 		body: {
 			data: Record<string, unknown>;
 			slug?: string | null;
+			slugSegment?: string;
 			status?: string;
 			authorId?: string;
 			bylines?: Array<{ bylineId: string; roleLabel?: string | null }>;
@@ -361,6 +362,7 @@ export interface EmDashHandlers {
 		body: {
 			data?: Record<string, unknown>;
 			slug?: string | null;
+			slugSegment?: string;
 			status?: string;
 			authorId?: string | null;
 			bylines?: Array<{ bylineId: string; roleLabel?: string | null }>;

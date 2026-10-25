@@ -178,6 +178,7 @@ export async function buildManifestCollections(
 				supports: collection.supports || [],
 				hasSeo: collection.hasSeo,
 				urlPattern: collection.urlPattern,
+				hierarchyRelation: collection.hierarchyRelation,
 				routable: collection.routable !== false,
 				titleField: collection.titleField,
 				dateField: collection.dateField,

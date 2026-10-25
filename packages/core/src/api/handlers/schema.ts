@@ -1,17 +1,25 @@
-/**
- * Schema/collection management handlers
- */
-
 import type { Kysely } from "kysely";
 
 import { backfillReferenceEdges } from "../../database/reference-backfill.js";
+import { ContentRepository } from "../../database/repositories/content.js";
 import { RelationRepository, type Relation } from "../../database/repositories/relation.js";
+import {
+	EmDashValidationError,
+	ContentMutationConflictError,
+} from "../../database/repositories/types.js";
 import { withTransaction } from "../../database/transaction.js";
+/**
+ * Schema/collection management handlers
+ */
 import type { Database } from "../../database/types.js";
+import { publishHierarchicalContent, loadHierarchyState } from "../../hierarchy/publish.js";
 import {
 	invalidateCollectionCache,
 	invalidateSchemaObjectCache,
 } from "../../object-cache/index.js";
+import { invalidateUrlPatternCache } from "../../query.js";
+import { publishRedirectChanges } from "../../redirects/artifacts.js";
+import { invalidateRedirectCache } from "../../redirects/cache.js";
 import {
 	SchemaRegistry,
 	SchemaError,
@@ -311,6 +319,42 @@ export async function handleSchemaCollectionUpdate(
 ): Promise<ApiResult<CollectionResponse>> {
 	try {
 		const registry = new SchemaRegistry(db);
+		const existing = await registry.getCollection(slug);
+		if (input.hierarchyRelation && !existing?.hierarchyRelation) {
+			if (!existing) throw new EmDashValidationError("Collection not found");
+			if (Object.keys(input).some((key) => key !== "hierarchyRelation" && key !== "urlPattern")) {
+				throw new EmDashValidationError("Activate hierarchy separately from other schema changes");
+			}
+			if (!existing.supports.includes("revisions"))
+				throw new EmDashValidationError("Enable revisions before activating hierarchy");
+			const state = await loadHierarchyState(db, slug, input.hierarchyRelation);
+			const anchor =
+				state.rows.find((row) => !row.deleted_at && row.status === "published") ??
+				state.rows.find((row) => !row.deleted_at);
+			if (anchor) {
+				const root = await new ContentRepository(db).findById(slug, anchor.id);
+				if (!root) throw new ContentMutationConflictError();
+				await publishHierarchicalContent(
+					db,
+					slug,
+					root,
+					{
+						hierarchyRelation: input.hierarchyRelation,
+						urlPattern: input.urlPattern ?? null,
+						previousUrlPattern: existing.urlPattern ?? null,
+					},
+					{ activate: true },
+				);
+				invalidateSchemaCache(slug);
+				invalidateSchemaObjectCache();
+				invalidateUrlPatternCache();
+				invalidateRedirectCache();
+				await publishRedirectChanges(db);
+				const item = await registry.getCollection(slug);
+				if (!item) throw new Error("Activated collection not found");
+				return { success: true, data: { item } };
+			}
+		}
 		const item = await registry.updateCollection(slug, input);
 
 		return {
@@ -318,6 +362,10 @@ export async function handleSchemaCollectionUpdate(
 			data: { item },
 		};
 	} catch (error) {
+		if (error instanceof ContentMutationConflictError)
+			return { success: false, error: { code: "CONFLICT", message: error.message } };
+		if (error instanceof EmDashValidationError)
+			return { success: false, error: { code: "VALIDATION_ERROR", message: error.message } };
 		if (error instanceof SchemaError) {
 			return {
 				success: false,

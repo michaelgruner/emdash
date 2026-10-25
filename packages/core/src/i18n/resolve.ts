@@ -7,6 +7,7 @@
  * not filter by locale" — legacy single-locale behaviour).
  */
 
+import { encodeSlugPath } from "../hierarchy/paths.js";
 import { getRequestContext } from "../request-context.js";
 import {
 	getFallbackChain,
@@ -101,6 +102,7 @@ export function interpolateUrlPattern(options: {
 	const basePattern = pattern ?? `/${encodeURIComponent(collection)}/{slug}`;
 	let path = basePattern
 		.replaceAll("{slug}", encodeURIComponent(slug))
+		.replaceAll("{path}", () => encodeSlugPath(slug))
 		.replaceAll("{id}", encodeURIComponent(id));
 	path = applyDateTokens(path, date);
 	path = path.replace(REPEATED_SLASHES, "/");

@@ -73,6 +73,7 @@ export interface SchemaCollection {
 	supports: string[];
 	source?: string;
 	urlPattern?: string;
+	hierarchyRelation?: string;
 	/** Published entries require a slug unless this is false. */
 	routable?: boolean;
 	hasSeo: boolean;
@@ -149,6 +150,7 @@ export interface CreateCollectionInput {
 	admin?: CollectionAdminConfig;
 	supports?: string[];
 	urlPattern?: string;
+	hierarchyRelation?: string;
 	routable?: boolean;
 	hasSeo?: boolean;
 	hidden?: boolean;
@@ -165,6 +167,7 @@ export interface UpdateCollectionInput {
 	admin?: CollectionAdminConfig;
 	supports?: string[];
 	urlPattern?: string;
+	hierarchyRelation?: string;
 	routable?: boolean;
 	hasSeo?: boolean;
 	hidden?: boolean;

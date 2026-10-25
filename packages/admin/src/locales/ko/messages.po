@@ -2049,7 +2049,7 @@ msgstr "인증이 취소되었거나 시간이 초과되었습니다. 다시 시
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:80
 #: packages/admin/src/components/comments/CommentInbox.tsx:325
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1417
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1420
 #: packages/admin/src/components/RelationForm.tsx:315
 #: packages/admin/src/components/users/roleDefinitions.ts:30
 #: packages/admin/src/components/WelcomeModal.tsx:27
@@ -2456,8 +2456,8 @@ msgstr "저자 정보가 업데이트되었습니다."
 
 #: packages/admin/src/components/BylineFilter.tsx:145
 #: packages/admin/src/components/calendar/CalendarEntryPanel.tsx:339
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1143
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1147
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1146
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1150
 #: packages/admin/src/components/settings/transfer/labels.ts:19
 #: packages/admin/src/components/settings/transfer/labels.ts:79
 #: packages/admin/src/components/Sidebar.tsx:454
@@ -2512,7 +2512,7 @@ msgstr "콘텐츠 조회 가능"
 #: packages/admin/src/components/ContentPickerModal.tsx:386
 #: packages/admin/src/components/ContentSettingsPanel.tsx:358
 #: packages/admin/src/components/ContentSettingsPanel.tsx:549
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1379
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1382
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:605
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:818
 #: packages/admin/src/components/editor/PluginBlockNode.tsx:391
@@ -3367,7 +3367,7 @@ msgstr "콘텐츠 ID:"
 msgid "Content is now live"
 msgstr "콘텐츠를 게시했습니다"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1093
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1096
 msgid "Content language"
 msgstr "콘텐츠 언어"
 
@@ -5294,7 +5294,7 @@ msgstr "추적을 활성화하면 기존 콘텐츠를 색인하고 참조를 최
 msgid "Enabled"
 msgstr "활성화됨"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1098
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1101
 msgid "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 msgstr "콘텐츠 언어가 설정되지 않아 영어가 사용됩니다. 콘텐츠 언어는 항목에 저장되며 관리자 화면의 언어와는 별개입니다."
 
@@ -5571,7 +5571,7 @@ msgstr "보안 감사 실패"
 msgid "Failed to abandon import"
 msgstr "가져오기를 포기하지 못했습니다"
 
-#: packages/admin/src/lib/api/schema.ts:319
+#: packages/admin/src/lib/api/schema.ts:322
 msgid "Failed to activate block type version"
 msgstr ""
 
@@ -5620,7 +5620,7 @@ msgstr ""
 msgid "Failed to communicate with plugin"
 msgstr "플러그인과 통신하지 못했습니다."
 
-#: packages/admin/src/lib/api/content.ts:594
+#: packages/admin/src/lib/api/content.ts:595
 msgid "Failed to compare revisions"
 msgstr ""
 
@@ -5663,7 +5663,7 @@ msgstr ""
 msgid "Failed to create backup"
 msgstr "백업을 생성하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:283
+#: packages/admin/src/lib/api/schema.ts:286
 msgid "Failed to create block type"
 msgstr ""
 
@@ -5679,15 +5679,15 @@ msgstr "저자 정보 필드를 생성하지 못했습니다."
 msgid "Failed to create byline translation"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:371
+#: packages/admin/src/lib/api/schema.ts:374
 msgid "Failed to create collection"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:306
+#: packages/admin/src/lib/api/content.ts:307
 msgid "Failed to create content"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:432
+#: packages/admin/src/lib/api/schema.ts:435
 #: packages/admin/src/routes/byline-schema.tsx:102
 msgid "Failed to create field"
 msgstr "필드를 생성하지 못했습니다."
@@ -5773,7 +5773,7 @@ msgstr "저자 정보를 삭제하지 못했습니다."
 msgid "Failed to delete byline field"
 msgstr "저자 정보 필드를 삭제하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:403
+#: packages/admin/src/lib/api/schema.ts:406
 msgid "Failed to delete collection"
 msgstr "컬렉션을 삭제하지 못했습니다."
 
@@ -5782,11 +5782,11 @@ msgstr "컬렉션을 삭제하지 못했습니다."
 msgid "Failed to delete comment"
 msgstr "댓글을 삭제하지 못했습니다."
 
-#: packages/admin/src/lib/api/content.ts:349
+#: packages/admin/src/lib/api/content.ts:350
 msgid "Failed to delete content"
 msgstr "콘텐츠를 삭제하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:473
+#: packages/admin/src/lib/api/schema.ts:476
 #: packages/admin/src/routes/byline-schema.tsx:138
 msgid "Failed to delete field"
 msgstr "필드를 삭제하지 못했습니다."
@@ -5864,7 +5864,7 @@ msgstr "사용자를 비활성화하지 못했습니다."
 msgid "Failed to discard changes"
 msgstr "변경 사항을 버리지 못했습니다"
 
-#: packages/admin/src/lib/api/content.ts:573
+#: packages/admin/src/lib/api/content.ts:574
 msgid "Failed to discard draft"
 msgstr ""
 
@@ -5885,7 +5885,7 @@ msgstr "패키지 파일을 다운로드하지 못했습니다"
 msgid "Failed to duplicate"
 msgstr "복제에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:409
+#: packages/admin/src/lib/api/content.ts:410
 msgid "Failed to duplicate content"
 msgstr ""
 
@@ -5922,7 +5922,7 @@ msgstr ""
 msgid "Failed to fetch API tokens"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:371
+#: packages/admin/src/lib/api/client.ts:372
 msgid "Failed to fetch auth mode"
 msgstr "인증 모드를 가져오지 못했습니다"
 
@@ -5930,11 +5930,11 @@ msgstr "인증 모드를 가져오지 못했습니다"
 msgid "Failed to fetch backup settings"
 msgstr "백업 설정을 가져오지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:270
+#: packages/admin/src/lib/api/schema.ts:273
 msgid "Failed to fetch block type"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:261
+#: packages/admin/src/lib/api/schema.ts:264
 msgid "Failed to fetch block types"
 msgstr ""
 
@@ -5950,12 +5950,12 @@ msgstr ""
 msgid "Failed to fetch bylines"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:351
-#: packages/admin/src/lib/api/schema.ts:355
+#: packages/admin/src/lib/api/schema.ts:354
+#: packages/admin/src/lib/api/schema.ts:358
 msgid "Failed to fetch collection"
 msgstr "컬렉션을 불러오지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:331
+#: packages/admin/src/lib/api/schema.ts:334
 msgid "Failed to fetch collections"
 msgstr ""
 
@@ -5971,12 +5971,12 @@ msgstr ""
 msgid "Failed to fetch comments"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:237
-#: packages/admin/src/lib/api/content.ts:277
+#: packages/admin/src/lib/api/content.ts:238
+#: packages/admin/src/lib/api/content.ts:278
 msgid "Failed to fetch content"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:258
+#: packages/admin/src/lib/api/content.ts:259
 msgid "Failed to fetch content authors"
 msgstr ""
 
@@ -5992,11 +5992,11 @@ msgstr "이메일 설정을 불러오지 못했습니다."
 msgid "Failed to fetch entry terms"
 msgstr "콘텐츠에 지정된 분류 항목을 가져오지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:413
+#: packages/admin/src/lib/api/schema.ts:416
 msgid "Failed to fetch fields"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:354
+#: packages/admin/src/lib/api/client.ts:355
 msgid "Failed to fetch manifest"
 msgstr "매니페스트를 가져오지 못했습니다"
 
@@ -6036,7 +6036,7 @@ msgstr ""
 msgid "Failed to fetch menus"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:525
+#: packages/admin/src/lib/api/schema.ts:528
 msgid "Failed to fetch orphaned tables"
 msgstr ""
 
@@ -6082,12 +6082,12 @@ msgstr ""
 msgid "Failed to fetch relations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:652
-#: packages/admin/src/lib/api/content.ts:657
+#: packages/admin/src/lib/api/content.ts:653
+#: packages/admin/src/lib/api/content.ts:658
 msgid "Failed to fetch revision"
 msgstr "버전을 불러오지 못했습니다."
 
-#: packages/admin/src/lib/api/content.ts:639
+#: packages/admin/src/lib/api/content.ts:640
 msgid "Failed to fetch revisions"
 msgstr ""
 
@@ -6128,11 +6128,11 @@ msgstr ""
 msgid "Failed to fetch theme"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:113
+#: packages/admin/src/lib/api/content.ts:114
 msgid "Failed to fetch translations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:375
+#: packages/admin/src/lib/api/content.ts:376
 msgid "Failed to fetch trashed content"
 msgstr ""
 
@@ -6336,7 +6336,7 @@ msgstr "항목의 편집 잠금에 실패했습니다"
 msgid "Failed to perform bulk action"
 msgstr "일괄 작업에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:397
+#: packages/admin/src/lib/api/content.ts:398
 msgid "Failed to permanently delete content"
 msgstr "콘텐츠를 영구 삭제하지 못했습니다."
 
@@ -6354,7 +6354,7 @@ msgstr ""
 msgid "Failed to publish"
 msgstr "게시에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:529
+#: packages/admin/src/lib/api/content.ts:530
 msgid "Failed to publish content"
 msgstr ""
 
@@ -6366,7 +6366,7 @@ msgstr "저자 정보 필드의 사용 현황을 불러오지 못했습니다."
 msgid "Failed to register {slug}"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:548
+#: packages/admin/src/lib/api/schema.ts:551
 msgid "Failed to register orphaned table"
 msgstr ""
 
@@ -6396,11 +6396,11 @@ msgstr "패스키 이름을 바꾸지 못했습니다."
 msgid "Failed to reorder byline fields"
 msgstr "저자 정보 필드의 순서를 변경하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:505
+#: packages/admin/src/lib/api/schema.ts:508
 msgid "Failed to reorder content types"
 msgstr "콘텐츠 유형의 순서를 변경하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:488
+#: packages/admin/src/lib/api/schema.ts:491
 #: packages/admin/src/routes/byline-schema.tsx:152
 msgid "Failed to reorder fields"
 msgstr "필드의 순서를 변경하지 못했습니다."
@@ -6425,12 +6425,12 @@ msgstr "미디어 이미지 교체에 실패했습니다"
 msgid "Failed to restore"
 msgstr "복원에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:386
+#: packages/admin/src/lib/api/content.ts:387
 msgid "Failed to restore content"
 msgstr "콘텐츠를 복원하지 못했습니다."
 
-#: packages/admin/src/lib/api/content.ts:674
-#: packages/admin/src/lib/api/content.ts:679
+#: packages/admin/src/lib/api/content.ts:675
+#: packages/admin/src/lib/api/content.ts:680
 msgid "Failed to restore revision"
 msgstr "버전을 복원하지 못했습니다."
 
@@ -6468,7 +6468,7 @@ msgstr "설정을 저장하지 못했습니다."
 msgid "Failed to schedule"
 msgstr "게시 예약에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:433
+#: packages/admin/src/lib/api/content.ts:434
 msgid "Failed to schedule content"
 msgstr ""
 
@@ -6512,7 +6512,7 @@ msgstr "플러그인을 제거하지 못했습니다."
 msgid "Failed to unpublish"
 msgstr "게시 취소에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:552
+#: packages/admin/src/lib/api/content.ts:553
 msgid "Failed to unpublish content"
 msgstr ""
 
@@ -6520,7 +6520,7 @@ msgstr ""
 msgid "Failed to unschedule"
 msgstr "게시 예약 취소에 실패했습니다"
 
-#: packages/admin/src/lib/api/content.ts:454
+#: packages/admin/src/lib/api/content.ts:455
 msgid "Failed to unschedule content"
 msgstr ""
 
@@ -6541,7 +6541,7 @@ msgstr ""
 msgid "Failed to update backup settings"
 msgstr "백업 설정을 업데이트하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:299
+#: packages/admin/src/lib/api/schema.ts:302
 msgid "Failed to update block type"
 msgstr ""
 
@@ -6553,7 +6553,7 @@ msgstr ""
 msgid "Failed to update byline field"
 msgstr "저자 정보 필드를 업데이트하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:390
+#: packages/admin/src/lib/api/schema.ts:393
 msgid "Failed to update collection"
 msgstr ""
 
@@ -6561,7 +6561,7 @@ msgstr ""
 msgid "Failed to update comment status"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:330
+#: packages/admin/src/lib/api/content.ts:331
 msgid "Failed to update content"
 msgstr ""
 
@@ -6569,7 +6569,7 @@ msgstr ""
 msgid "Failed to update domain"
 msgstr "도메인을 업데이트하지 못했습니다."
 
-#: packages/admin/src/lib/api/schema.ts:455
+#: packages/admin/src/lib/api/schema.ts:458
 msgid "Failed to update field"
 msgstr ""
 
@@ -8970,14 +8970,14 @@ msgstr "휴지통으로 이동"
 
 #: packages/admin/src/components/ContentList.tsx:672
 #: packages/admin/src/components/ContentList.tsx:1552
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1366
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1386
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1369
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1389
 msgid "Move to Trash"
 msgstr "휴지통으로 이동"
 
 #: packages/admin/src/components/ContentList.tsx:650
 #: packages/admin/src/components/ContentList.tsx:1537
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1371
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1374
 msgid "Move to Trash?"
 msgstr "휴지통으로 이동하시겠습니까?"
 
@@ -10016,7 +10016,7 @@ msgstr "원본:"
 msgid "Other"
 msgstr "기타"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1314
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1317
 #: packages/admin/src/components/editor/DocumentOutline.tsx:248
 msgid "Outline"
 msgstr "개요"
@@ -10037,8 +10037,8 @@ msgstr ""
 msgid "Overrides the page title in search engine results"
 msgstr "검색 결과에 표시되는 페이지 제목을 재정의합니다"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1128
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1131
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1134
 msgid "Ownership"
 msgstr "작성자"
 
@@ -11390,7 +11390,7 @@ msgstr "레포지토리"
 msgid "Request a new link"
 msgstr "새 링크 요청"
 
-#: packages/admin/src/lib/api/client.ts:342
+#: packages/admin/src/lib/api/client.ts:343
 msgid "Request failed"
 msgstr "요청에 실패했습니다"
 
@@ -11661,7 +11661,7 @@ msgstr "검증된 업데이트 검토"
 msgid "Reviewing…"
 msgstr "검토 중…"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1338
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1341
 #: packages/admin/src/components/ContentTypeEditor.tsx:96
 #: packages/admin/src/components/RevisionHistory.tsx:57
 #: packages/admin/src/components/settings/transfer/labels.ts:22
@@ -12548,8 +12548,8 @@ msgstr "테스트 이메일 보내기"
 msgid "Sending..."
 msgstr "보내는 중..."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1227
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1230
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1233
 #: packages/admin/src/components/ContentTypeEditor.tsx:643
 #: packages/admin/src/components/Settings.tsx:66
 msgid "SEO"
@@ -12732,7 +12732,7 @@ msgstr "전체 {0}개 중 {pageShowingRange} 표시"
 msgid "Shown in the admin. Some themes also show it on the site."
 msgstr ""
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1152
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1155
 msgid "Shown to readers in this order."
 msgstr "독자에게 이 순서로 표시됩니다."
 
@@ -13320,7 +13320,7 @@ msgstr "열기 방식"
 msgid "Target locale"
 msgstr "번역 대상 언어"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1214
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1217
 #: packages/admin/src/components/settings/transfer/labels.ts:13
 #: packages/admin/src/components/TaxonomySidebar.tsx:898
 msgid "Taxonomies"
@@ -14257,7 +14257,7 @@ msgstr ""
 msgid "This will delete the widget area and all its widgets. This action cannot be undone."
 msgstr "위젯 영역과 그 안의 모든 위젯이 삭제됩니다. 이 작업은 되돌릴 수 없습니다."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1373
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1376
 msgid "This will move the item to trash. You can restore it later from the trash."
 msgstr "항목이 휴지통으로 이동됩니다. 나중에 휴지통에서 복원할 수 있습니다."
 
@@ -14433,7 +14433,7 @@ msgstr "번역 중..."
 msgid "Translation created"
 msgstr "번역이 생성되었습니다."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1192
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1195
 #: packages/admin/src/components/TranslationsPanel.tsx:60
 msgid "Translations"
 msgstr "번역"
@@ -14624,8 +14624,8 @@ msgstr "TypeScript"
 msgid "Unable to reach marketplace"
 msgstr "마켓플레이스에 접속할 수 없습니다"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1409
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1426
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1412
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1429
 msgid "Unassigned"
 msgstr "할당되지 않음"
 
@@ -14992,6 +14992,10 @@ msgstr "URL 및 언어"
 #: packages/admin/src/components/ContentTypeEditor.tsx:536
 msgid "URL Pattern"
 msgstr "URL 패턴"
+
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1085
+msgid "URL segment"
+msgstr ""
 
 #: packages/admin/src/components/Widgets.tsx:132
 msgid "URL template (e.g. /blog/:slug)"
@@ -15459,7 +15463,7 @@ msgstr "이 분류를 사용할 수 있는 콘텐츠 유형"
 msgid "Whole number"
 msgstr "정수"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1165
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1168
 msgid "Why are bylines shown in this order?"
 msgstr "저자 정보가 이 순서로 표시되는 이유"
 
@@ -15467,7 +15471,7 @@ msgstr "저자 정보가 이 순서로 표시되는 이유"
 msgid "Why can't this be changed?"
 msgstr "변경할 수 없는 이유"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1111
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1114
 msgid "Why English is used"
 msgstr "영어가 사용되는 이유"
 

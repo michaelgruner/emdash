@@ -116,6 +116,30 @@ describe("Loader revision preview", () => {
 		expect(result.entries.map((entry) => entry.data.title)).toEqual(["Visible"]);
 	});
 
+	it("resolves a pending path only for that entry's preview token", async () => {
+		const post = await createPublishedPost("Original Title");
+		const repo = new ContentRepository(db);
+		await repo.updateDraftAware("post", post.id, {
+			slug: "product/new-guide",
+			data: { title: "Draft title" },
+		});
+		const saved = await repo.findById("post", post.id);
+		const loader = emdashLoader();
+		const read = (preview?: { collection: string; id: string }) =>
+			runWithContext({ editMode: false, db, preview }, () =>
+				loader.loadEntry!({
+					filter: { type: "post", id: "product/new-guide", revisionId: saved!.draftRevisionId! },
+				}),
+			);
+		expect(await read()).toBeUndefined();
+		expect(await read({ collection: "post", id: "another-entry" })).toBeUndefined();
+		expect(await read({ collection: "another_collection", id: post.id })).toBeUndefined();
+		expect(await read({ collection: "post", id: post.id })).toMatchObject({
+			id: "product/new-guide",
+			data: { title: "Draft title" },
+		});
+	});
+
 	it("should use revision content fields while preserving system date types", async () => {
 		const post = await createPublishedPost("Original Title");
 

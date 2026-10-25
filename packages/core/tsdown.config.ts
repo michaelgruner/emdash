@@ -121,6 +121,7 @@ export default defineConfig({
 		"src/client/cf-access.ts",
 		// SEO helpers
 		"src/seo/index.ts",
+		"src/urls.ts",
 		// Public page contributions
 		"src/page/index.ts",
 		// Plugin admin utilities (shared helpers for plugin admin.tsx files)

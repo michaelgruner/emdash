@@ -121,7 +121,7 @@ export async function liveReferenceSelection(
  * follow the current live selection, preserving additions and removals made
  * from the relation's opposite end.
  */
-function applyReferenceDiff(baseline: string[], staged: string[], live: string[]): string[] {
+export function applyReferenceDiff(baseline: string[], staged: string[], live: string[]): string[] {
 	const baselineSet = new Set(baseline);
 	const stagedSet = new Set(staged);
 	const liveSet = new Set(live);

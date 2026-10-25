@@ -2120,12 +2120,23 @@ export function emdashLoader(): LiveLoader<EntryData, EntryFilter, LoaderCollect
 					FROM (SELECT ${bylinesExistSelect}, ${booleanFieldsSelect}) AS metadata
 				) AS _emdash_entry_metadata`;
 				const slugVisibility = filter?.publishedOnly ? sql`AND c.status = ${"published"}` : sql``;
+				const preview = getRequestContext()?.preview;
+				const pendingSlug = isPostgres(db)
+					? sql`r.data::jsonb ->> '_slug'`
+					: sql`json_extract(r.data, '$._slug')`;
+				const previewAddress =
+					!filter?.publishedOnly && preview?.collection === type
+						? sql`OR (c.id = ${preview.id} AND EXISTS (
+						SELECT 1 FROM revisions AS r WHERE r.id = c.draft_revision_id
+						AND r.collection = ${type} AND r.entry_id = c.id AND ${pendingSlug} = ${id}
+					))`
+						: sql``;
 				const result = locale
 					? await sql<Record<string, unknown>>`
 							SELECT c.*, ${seoSelect}, ${termsSelect}, ${bylinesSelect}, ${metadataSelect}
 							FROM ${sql.ref(tableName)} AS c
 							WHERE c.deleted_at IS NULL
-							AND ((c.slug = ${id} AND ${localeMatches("c.locale", locale)} ${slugVisibility}) OR c.id = ${id})
+							AND ((c.slug = ${id} AND ${localeMatches("c.locale", locale)} ${slugVisibility}) OR c.id = ${id} ${previewAddress})
 							ORDER BY CASE WHEN c.id = ${id} THEN 0 ELSE 1 END, ${localeOrder("c.locale", locale)}, c.id
 							LIMIT 1
 						`.execute(db)
@@ -2133,7 +2144,7 @@ export function emdashLoader(): LiveLoader<EntryData, EntryFilter, LoaderCollect
 							SELECT c.*, ${seoSelect}, ${termsSelect}, ${bylinesSelect}, ${metadataSelect}
 							FROM ${sql.ref(tableName)} AS c
 							WHERE c.deleted_at IS NULL
-							AND ((c.slug = ${id} ${slugVisibility}) OR c.id = ${id})
+							AND ((c.slug = ${id} ${slugVisibility}) OR c.id = ${id} ${previewAddress})
 							LIMIT 1
 						`.execute(db);
 

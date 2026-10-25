@@ -1186,12 +1186,11 @@ function ContentEditPage() {
 				draftData[key] = value;
 			}
 		}
-		// Draft slug override
 		const draftSlug =
-			typeof draftRevision.data._slug === "string" ? draftRevision.data._slug : rawItem.slug;
+			typeof draftRevision.data._slug === "string" ? draftRevision.data._slug : rawItem.draftSlug;
 		return {
 			...rawItem,
-			slug: draftSlug,
+			draftSlug,
 			data: { ...rawItem.data, ...draftData },
 		};
 	}, [rawItem, draftRevision]);

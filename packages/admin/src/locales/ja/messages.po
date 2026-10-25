@@ -2049,7 +2049,7 @@ msgstr "認証がキャンセルされたかタイムアウトしました。も
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:80
 #: packages/admin/src/components/comments/CommentInbox.tsx:325
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1417
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1420
 #: packages/admin/src/components/RelationForm.tsx:315
 #: packages/admin/src/components/users/roleDefinitions.ts:30
 #: packages/admin/src/components/WelcomeModal.tsx:27
@@ -2456,8 +2456,8 @@ msgstr ""
 
 #: packages/admin/src/components/BylineFilter.tsx:145
 #: packages/admin/src/components/calendar/CalendarEntryPanel.tsx:339
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1143
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1147
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1146
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1150
 #: packages/admin/src/components/settings/transfer/labels.ts:19
 #: packages/admin/src/components/settings/transfer/labels.ts:79
 #: packages/admin/src/components/Sidebar.tsx:454
@@ -2512,7 +2512,7 @@ msgstr "コンテンツを閲覧できます"
 #: packages/admin/src/components/ContentPickerModal.tsx:386
 #: packages/admin/src/components/ContentSettingsPanel.tsx:358
 #: packages/admin/src/components/ContentSettingsPanel.tsx:549
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1379
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1382
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:605
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:818
 #: packages/admin/src/components/editor/PluginBlockNode.tsx:391
@@ -3367,7 +3367,7 @@ msgstr "コンテンツID："
 msgid "Content is now live"
 msgstr "コンテンツを公開しました"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1093
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1096
 msgid "Content language"
 msgstr ""
 
@@ -5294,7 +5294,7 @@ msgstr "有効にすると、既存コンテンツ内でのメディアの使用
 msgid "Enabled"
 msgstr "有効"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1098
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1101
 msgid "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 msgstr ""
 
@@ -5571,7 +5571,7 @@ msgstr "セキュリティ監査に不合格"
 msgid "Failed to abandon import"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:319
+#: packages/admin/src/lib/api/schema.ts:322
 msgid "Failed to activate block type version"
 msgstr ""
 
@@ -5620,7 +5620,7 @@ msgstr ""
 msgid "Failed to communicate with plugin"
 msgstr "プラグインとの通信に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:594
+#: packages/admin/src/lib/api/content.ts:595
 msgid "Failed to compare revisions"
 msgstr ""
 
@@ -5663,7 +5663,7 @@ msgstr ""
 msgid "Failed to create backup"
 msgstr "バックアップを作成できませんでした"
 
-#: packages/admin/src/lib/api/schema.ts:283
+#: packages/admin/src/lib/api/schema.ts:286
 msgid "Failed to create block type"
 msgstr ""
 
@@ -5679,15 +5679,15 @@ msgstr "執筆者情報の項目の作成に失敗しました"
 msgid "Failed to create byline translation"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:371
+#: packages/admin/src/lib/api/schema.ts:374
 msgid "Failed to create collection"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:306
+#: packages/admin/src/lib/api/content.ts:307
 msgid "Failed to create content"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:432
+#: packages/admin/src/lib/api/schema.ts:435
 #: packages/admin/src/routes/byline-schema.tsx:102
 msgid "Failed to create field"
 msgstr "項目を作成できませんでした"
@@ -5773,7 +5773,7 @@ msgstr "執筆者の削除に失敗しました"
 msgid "Failed to delete byline field"
 msgstr "執筆者情報の項目の削除に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:403
+#: packages/admin/src/lib/api/schema.ts:406
 msgid "Failed to delete collection"
 msgstr "コンテンツタイプの削除に失敗しました"
 
@@ -5782,11 +5782,11 @@ msgstr "コンテンツタイプの削除に失敗しました"
 msgid "Failed to delete comment"
 msgstr "コメントの削除に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:349
+#: packages/admin/src/lib/api/content.ts:350
 msgid "Failed to delete content"
 msgstr "コンテンツの削除に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:473
+#: packages/admin/src/lib/api/schema.ts:476
 #: packages/admin/src/routes/byline-schema.tsx:138
 msgid "Failed to delete field"
 msgstr "項目を削除できませんでした"
@@ -5864,7 +5864,7 @@ msgstr "ユーザーの無効化に失敗しました"
 msgid "Failed to discard changes"
 msgstr "変更の破棄に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:573
+#: packages/admin/src/lib/api/content.ts:574
 msgid "Failed to discard draft"
 msgstr ""
 
@@ -5885,7 +5885,7 @@ msgstr ""
 msgid "Failed to duplicate"
 msgstr "複製に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:409
+#: packages/admin/src/lib/api/content.ts:410
 msgid "Failed to duplicate content"
 msgstr ""
 
@@ -5922,7 +5922,7 @@ msgstr ""
 msgid "Failed to fetch API tokens"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:371
+#: packages/admin/src/lib/api/client.ts:372
 msgid "Failed to fetch auth mode"
 msgstr "認証モードの取得に失敗しました"
 
@@ -5930,11 +5930,11 @@ msgstr "認証モードの取得に失敗しました"
 msgid "Failed to fetch backup settings"
 msgstr "バックアップ設定の取得に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:270
+#: packages/admin/src/lib/api/schema.ts:273
 msgid "Failed to fetch block type"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:261
+#: packages/admin/src/lib/api/schema.ts:264
 msgid "Failed to fetch block types"
 msgstr ""
 
@@ -5950,12 +5950,12 @@ msgstr ""
 msgid "Failed to fetch bylines"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:351
-#: packages/admin/src/lib/api/schema.ts:355
+#: packages/admin/src/lib/api/schema.ts:354
+#: packages/admin/src/lib/api/schema.ts:358
 msgid "Failed to fetch collection"
 msgstr "コンテンツタイプの取得に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:331
+#: packages/admin/src/lib/api/schema.ts:334
 msgid "Failed to fetch collections"
 msgstr ""
 
@@ -5971,12 +5971,12 @@ msgstr ""
 msgid "Failed to fetch comments"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:237
-#: packages/admin/src/lib/api/content.ts:277
+#: packages/admin/src/lib/api/content.ts:238
+#: packages/admin/src/lib/api/content.ts:278
 msgid "Failed to fetch content"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:258
+#: packages/admin/src/lib/api/content.ts:259
 msgid "Failed to fetch content authors"
 msgstr ""
 
@@ -5992,11 +5992,11 @@ msgstr "メール設定の取得に失敗しました"
 msgid "Failed to fetch entry terms"
 msgstr "コンテンツに設定された分類項目の取得に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:413
+#: packages/admin/src/lib/api/schema.ts:416
 msgid "Failed to fetch fields"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:354
+#: packages/admin/src/lib/api/client.ts:355
 msgid "Failed to fetch manifest"
 msgstr "マニフェストの取得に失敗しました"
 
@@ -6036,7 +6036,7 @@ msgstr ""
 msgid "Failed to fetch menus"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:525
+#: packages/admin/src/lib/api/schema.ts:528
 msgid "Failed to fetch orphaned tables"
 msgstr ""
 
@@ -6082,12 +6082,12 @@ msgstr ""
 msgid "Failed to fetch relations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:652
-#: packages/admin/src/lib/api/content.ts:657
+#: packages/admin/src/lib/api/content.ts:653
+#: packages/admin/src/lib/api/content.ts:658
 msgid "Failed to fetch revision"
 msgstr "版の取得に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:639
+#: packages/admin/src/lib/api/content.ts:640
 msgid "Failed to fetch revisions"
 msgstr ""
 
@@ -6128,11 +6128,11 @@ msgstr ""
 msgid "Failed to fetch theme"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:113
+#: packages/admin/src/lib/api/content.ts:114
 msgid "Failed to fetch translations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:375
+#: packages/admin/src/lib/api/content.ts:376
 msgid "Failed to fetch trashed content"
 msgstr ""
 
@@ -6336,7 +6336,7 @@ msgstr ""
 msgid "Failed to perform bulk action"
 msgstr "一括操作に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:397
+#: packages/admin/src/lib/api/content.ts:398
 msgid "Failed to permanently delete content"
 msgstr "コンテンツの完全削除に失敗しました"
 
@@ -6354,7 +6354,7 @@ msgstr ""
 msgid "Failed to publish"
 msgstr "公開に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:529
+#: packages/admin/src/lib/api/content.ts:530
 msgid "Failed to publish content"
 msgstr ""
 
@@ -6366,7 +6366,7 @@ msgstr "執筆者情報の項目の使用状況を取得できませんでした
 msgid "Failed to register {slug}"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:548
+#: packages/admin/src/lib/api/schema.ts:551
 msgid "Failed to register orphaned table"
 msgstr ""
 
@@ -6396,11 +6396,11 @@ msgstr "パスキーの名前を変更できませんでした"
 msgid "Failed to reorder byline fields"
 msgstr "執筆者情報の項目の並べ替えに失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:505
+#: packages/admin/src/lib/api/schema.ts:508
 msgid "Failed to reorder content types"
 msgstr "コンテンツタイプの並べ替えに失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:488
+#: packages/admin/src/lib/api/schema.ts:491
 #: packages/admin/src/routes/byline-schema.tsx:152
 msgid "Failed to reorder fields"
 msgstr "項目を並べ替えられませんでした"
@@ -6425,12 +6425,12 @@ msgstr ""
 msgid "Failed to restore"
 msgstr "復元に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:386
+#: packages/admin/src/lib/api/content.ts:387
 msgid "Failed to restore content"
 msgstr "コンテンツの復元に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:674
-#: packages/admin/src/lib/api/content.ts:679
+#: packages/admin/src/lib/api/content.ts:675
+#: packages/admin/src/lib/api/content.ts:680
 msgid "Failed to restore revision"
 msgstr "版の復元に失敗しました"
 
@@ -6468,7 +6468,7 @@ msgstr "設定の保存に失敗しました"
 msgid "Failed to schedule"
 msgstr "公開予約に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:433
+#: packages/admin/src/lib/api/content.ts:434
 msgid "Failed to schedule content"
 msgstr ""
 
@@ -6512,7 +6512,7 @@ msgstr "プラグインのアンインストールに失敗しました"
 msgid "Failed to unpublish"
 msgstr "非公開化に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:552
+#: packages/admin/src/lib/api/content.ts:553
 msgid "Failed to unpublish content"
 msgstr ""
 
@@ -6520,7 +6520,7 @@ msgstr ""
 msgid "Failed to unschedule"
 msgstr "公開予約の解除に失敗しました"
 
-#: packages/admin/src/lib/api/content.ts:454
+#: packages/admin/src/lib/api/content.ts:455
 msgid "Failed to unschedule content"
 msgstr ""
 
@@ -6541,7 +6541,7 @@ msgstr ""
 msgid "Failed to update backup settings"
 msgstr "バックアップ設定の更新に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:299
+#: packages/admin/src/lib/api/schema.ts:302
 msgid "Failed to update block type"
 msgstr ""
 
@@ -6553,7 +6553,7 @@ msgstr ""
 msgid "Failed to update byline field"
 msgstr "執筆者情報の項目の更新に失敗しました"
 
-#: packages/admin/src/lib/api/schema.ts:390
+#: packages/admin/src/lib/api/schema.ts:393
 msgid "Failed to update collection"
 msgstr ""
 
@@ -6561,7 +6561,7 @@ msgstr ""
 msgid "Failed to update comment status"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:330
+#: packages/admin/src/lib/api/content.ts:331
 msgid "Failed to update content"
 msgstr ""
 
@@ -6569,7 +6569,7 @@ msgstr ""
 msgid "Failed to update domain"
 msgstr "ドメインの設定を更新できませんでした"
 
-#: packages/admin/src/lib/api/schema.ts:455
+#: packages/admin/src/lib/api/schema.ts:458
 msgid "Failed to update field"
 msgstr ""
 
@@ -8970,14 +8970,14 @@ msgstr "ゴミ箱に移動"
 
 #: packages/admin/src/components/ContentList.tsx:672
 #: packages/admin/src/components/ContentList.tsx:1552
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1366
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1386
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1369
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1389
 msgid "Move to Trash"
 msgstr "ゴミ箱に移動"
 
 #: packages/admin/src/components/ContentList.tsx:650
 #: packages/admin/src/components/ContentList.tsx:1537
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1371
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1374
 msgid "Move to Trash?"
 msgstr "ゴミ箱に移動しますか？"
 
@@ -10016,7 +10016,7 @@ msgstr "元のサイズ："
 msgid "Other"
 msgstr ""
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1314
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1317
 #: packages/admin/src/components/editor/DocumentOutline.tsx:248
 msgid "Outline"
 msgstr "アウトライン"
@@ -10037,8 +10037,8 @@ msgstr ""
 msgid "Overrides the page title in search engine results"
 msgstr "検索エンジンの結果でページタイトルを上書き"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1128
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1131
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1134
 msgid "Ownership"
 msgstr "投稿者"
 
@@ -11390,7 +11390,7 @@ msgstr "リポジトリ"
 msgid "Request a new link"
 msgstr "新しいリンクをリクエスト"
 
-#: packages/admin/src/lib/api/client.ts:342
+#: packages/admin/src/lib/api/client.ts:343
 msgid "Request failed"
 msgstr "リクエストに失敗しました"
 
@@ -11661,7 +11661,7 @@ msgstr ""
 msgid "Reviewing…"
 msgstr ""
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1338
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1341
 #: packages/admin/src/components/ContentTypeEditor.tsx:96
 #: packages/admin/src/components/RevisionHistory.tsx:57
 #: packages/admin/src/components/settings/transfer/labels.ts:22
@@ -12548,8 +12548,8 @@ msgstr "テストメールを送信"
 msgid "Sending..."
 msgstr "送信中…"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1227
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1230
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1233
 #: packages/admin/src/components/ContentTypeEditor.tsx:643
 #: packages/admin/src/components/Settings.tsx:66
 msgid "SEO"
@@ -12732,7 +12732,7 @@ msgstr "全{0}件中{pageShowingRange}件を表示"
 msgid "Shown in the admin. Some themes also show it on the site."
 msgstr "管理画面に表示されます。テーマによってはサイトにも表示されます。"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1152
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1155
 msgid "Shown to readers in this order."
 msgstr ""
 
@@ -13320,7 +13320,7 @@ msgstr "リンクの開き方"
 msgid "Target locale"
 msgstr "翻訳先の言語"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1214
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1217
 #: packages/admin/src/components/settings/transfer/labels.ts:13
 #: packages/admin/src/components/TaxonomySidebar.tsx:898
 msgid "Taxonomies"
@@ -14257,7 +14257,7 @@ msgstr ""
 msgid "This will delete the widget area and all its widgets. This action cannot be undone."
 msgstr "ウィジェットエリアとそのすべてのウィジェットを削除します。この操作は取り消せません。"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1373
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1376
 msgid "This will move the item to trash. You can restore it later from the trash."
 msgstr "このコンテンツをゴミ箱に移動します。後でゴミ箱から復元できます。"
 
@@ -14433,7 +14433,7 @@ msgstr "翻訳中…"
 msgid "Translation created"
 msgstr "翻訳を作成しました"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1192
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1195
 #: packages/admin/src/components/TranslationsPanel.tsx:60
 msgid "Translations"
 msgstr "翻訳"
@@ -14624,8 +14624,8 @@ msgstr "TypeScript"
 msgid "Unable to reach marketplace"
 msgstr "マーケットプレイスに接続できません"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1409
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1426
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1412
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1429
 msgid "Unassigned"
 msgstr "未割り当て"
 
@@ -14992,6 +14992,10 @@ msgstr ""
 #: packages/admin/src/components/ContentTypeEditor.tsx:536
 msgid "URL Pattern"
 msgstr "URLパターン"
+
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1085
+msgid "URL segment"
+msgstr ""
 
 #: packages/admin/src/components/Widgets.tsx:132
 msgid "URL template (e.g. /blog/:slug)"
@@ -15459,7 +15463,7 @@ msgstr "この分類グループを使用するコンテンツタイプを選択
 msgid "Whole number"
 msgstr "整数"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1165
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1168
 msgid "Why are bylines shown in this order?"
 msgstr ""
 
@@ -15467,7 +15471,7 @@ msgstr ""
 msgid "Why can't this be changed?"
 msgstr "変更できない理由"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1111
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1114
 msgid "Why English is used"
 msgstr "英語が使用される理由"
 

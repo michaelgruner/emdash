@@ -2049,7 +2049,7 @@ msgstr "Authentication was cancelled or timed out. Please try again."
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:80
 #: packages/admin/src/components/comments/CommentInbox.tsx:325
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1417
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1420
 #: packages/admin/src/components/RelationForm.tsx:315
 #: packages/admin/src/components/users/roleDefinitions.ts:30
 #: packages/admin/src/components/WelcomeModal.tsx:27
@@ -2456,8 +2456,8 @@ msgstr "Byline updated"
 
 #: packages/admin/src/components/BylineFilter.tsx:145
 #: packages/admin/src/components/calendar/CalendarEntryPanel.tsx:339
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1143
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1147
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1146
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1150
 #: packages/admin/src/components/settings/transfer/labels.ts:19
 #: packages/admin/src/components/settings/transfer/labels.ts:79
 #: packages/admin/src/components/Sidebar.tsx:454
@@ -2512,7 +2512,7 @@ msgstr "Can view content"
 #: packages/admin/src/components/ContentPickerModal.tsx:386
 #: packages/admin/src/components/ContentSettingsPanel.tsx:358
 #: packages/admin/src/components/ContentSettingsPanel.tsx:549
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1379
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1382
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:605
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:818
 #: packages/admin/src/components/editor/PluginBlockNode.tsx:391
@@ -3367,7 +3367,7 @@ msgstr "Content ID:"
 msgid "Content is now live"
 msgstr "Content is now live"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1093
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1096
 msgid "Content language"
 msgstr "Content language"
 
@@ -5294,7 +5294,7 @@ msgstr "Enable tracking to index existing content and keep references up to date
 msgid "Enabled"
 msgstr "Enabled"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1098
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1101
 msgid "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 msgstr "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 
@@ -5571,7 +5571,7 @@ msgstr "Failed security audit"
 msgid "Failed to abandon import"
 msgstr "Failed to abandon import"
 
-#: packages/admin/src/lib/api/schema.ts:319
+#: packages/admin/src/lib/api/schema.ts:322
 msgid "Failed to activate block type version"
 msgstr "Failed to activate block type version"
 
@@ -5620,7 +5620,7 @@ msgstr "Failed to check for updates"
 msgid "Failed to communicate with plugin"
 msgstr "Failed to communicate with plugin"
 
-#: packages/admin/src/lib/api/content.ts:594
+#: packages/admin/src/lib/api/content.ts:595
 msgid "Failed to compare revisions"
 msgstr "Failed to compare revisions"
 
@@ -5663,7 +5663,7 @@ msgstr "Failed to create API token"
 msgid "Failed to create backup"
 msgstr "Failed to create backup"
 
-#: packages/admin/src/lib/api/schema.ts:283
+#: packages/admin/src/lib/api/schema.ts:286
 msgid "Failed to create block type"
 msgstr "Failed to create block type"
 
@@ -5679,15 +5679,15 @@ msgstr "Failed to create byline field"
 msgid "Failed to create byline translation"
 msgstr "Failed to create byline translation"
 
-#: packages/admin/src/lib/api/schema.ts:371
+#: packages/admin/src/lib/api/schema.ts:374
 msgid "Failed to create collection"
 msgstr "Failed to create collection"
 
-#: packages/admin/src/lib/api/content.ts:306
+#: packages/admin/src/lib/api/content.ts:307
 msgid "Failed to create content"
 msgstr "Failed to create content"
 
-#: packages/admin/src/lib/api/schema.ts:432
+#: packages/admin/src/lib/api/schema.ts:435
 #: packages/admin/src/routes/byline-schema.tsx:102
 msgid "Failed to create field"
 msgstr "Failed to create field"
@@ -5773,7 +5773,7 @@ msgstr "Failed to delete byline"
 msgid "Failed to delete byline field"
 msgstr "Failed to delete byline field"
 
-#: packages/admin/src/lib/api/schema.ts:403
+#: packages/admin/src/lib/api/schema.ts:406
 msgid "Failed to delete collection"
 msgstr "Failed to delete collection"
 
@@ -5782,11 +5782,11 @@ msgstr "Failed to delete collection"
 msgid "Failed to delete comment"
 msgstr "Failed to delete comment"
 
-#: packages/admin/src/lib/api/content.ts:349
+#: packages/admin/src/lib/api/content.ts:350
 msgid "Failed to delete content"
 msgstr "Failed to delete content"
 
-#: packages/admin/src/lib/api/schema.ts:473
+#: packages/admin/src/lib/api/schema.ts:476
 #: packages/admin/src/routes/byline-schema.tsx:138
 msgid "Failed to delete field"
 msgstr "Failed to delete field"
@@ -5864,7 +5864,7 @@ msgstr "Failed to disable user"
 msgid "Failed to discard changes"
 msgstr "Failed to discard changes"
 
-#: packages/admin/src/lib/api/content.ts:573
+#: packages/admin/src/lib/api/content.ts:574
 msgid "Failed to discard draft"
 msgstr "Failed to discard draft"
 
@@ -5885,7 +5885,7 @@ msgstr "Failed to download a package file"
 msgid "Failed to duplicate"
 msgstr "Failed to duplicate"
 
-#: packages/admin/src/lib/api/content.ts:409
+#: packages/admin/src/lib/api/content.ts:410
 msgid "Failed to duplicate content"
 msgstr "Failed to duplicate content"
 
@@ -5922,7 +5922,7 @@ msgstr "Failed to fetch allowed domains"
 msgid "Failed to fetch API tokens"
 msgstr "Failed to fetch API tokens"
 
-#: packages/admin/src/lib/api/client.ts:371
+#: packages/admin/src/lib/api/client.ts:372
 msgid "Failed to fetch auth mode"
 msgstr "Failed to fetch auth mode"
 
@@ -5930,11 +5930,11 @@ msgstr "Failed to fetch auth mode"
 msgid "Failed to fetch backup settings"
 msgstr "Failed to fetch backup settings"
 
-#: packages/admin/src/lib/api/schema.ts:270
+#: packages/admin/src/lib/api/schema.ts:273
 msgid "Failed to fetch block type"
 msgstr "Failed to fetch block type"
 
-#: packages/admin/src/lib/api/schema.ts:261
+#: packages/admin/src/lib/api/schema.ts:264
 msgid "Failed to fetch block types"
 msgstr "Failed to fetch block types"
 
@@ -5950,12 +5950,12 @@ msgstr "Failed to fetch byline translations"
 msgid "Failed to fetch bylines"
 msgstr "Failed to fetch bylines"
 
-#: packages/admin/src/lib/api/schema.ts:351
-#: packages/admin/src/lib/api/schema.ts:355
+#: packages/admin/src/lib/api/schema.ts:354
+#: packages/admin/src/lib/api/schema.ts:358
 msgid "Failed to fetch collection"
 msgstr "Failed to fetch collection"
 
-#: packages/admin/src/lib/api/schema.ts:331
+#: packages/admin/src/lib/api/schema.ts:334
 msgid "Failed to fetch collections"
 msgstr "Failed to fetch collections"
 
@@ -5971,12 +5971,12 @@ msgstr "Failed to fetch comment counts"
 msgid "Failed to fetch comments"
 msgstr "Failed to fetch comments"
 
-#: packages/admin/src/lib/api/content.ts:237
-#: packages/admin/src/lib/api/content.ts:277
+#: packages/admin/src/lib/api/content.ts:238
+#: packages/admin/src/lib/api/content.ts:278
 msgid "Failed to fetch content"
 msgstr "Failed to fetch content"
 
-#: packages/admin/src/lib/api/content.ts:258
+#: packages/admin/src/lib/api/content.ts:259
 msgid "Failed to fetch content authors"
 msgstr "Failed to fetch content authors"
 
@@ -5992,11 +5992,11 @@ msgstr "Failed to fetch email settings"
 msgid "Failed to fetch entry terms"
 msgstr "Failed to fetch entry terms"
 
-#: packages/admin/src/lib/api/schema.ts:413
+#: packages/admin/src/lib/api/schema.ts:416
 msgid "Failed to fetch fields"
 msgstr "Failed to fetch fields"
 
-#: packages/admin/src/lib/api/client.ts:354
+#: packages/admin/src/lib/api/client.ts:355
 msgid "Failed to fetch manifest"
 msgstr "Failed to fetch manifest"
 
@@ -6036,7 +6036,7 @@ msgstr "Failed to fetch menu translations"
 msgid "Failed to fetch menus"
 msgstr "Failed to fetch menus"
 
-#: packages/admin/src/lib/api/schema.ts:525
+#: packages/admin/src/lib/api/schema.ts:528
 msgid "Failed to fetch orphaned tables"
 msgstr "Failed to fetch orphaned tables"
 
@@ -6082,12 +6082,12 @@ msgstr "Failed to fetch relation"
 msgid "Failed to fetch relations"
 msgstr "Failed to fetch relations"
 
-#: packages/admin/src/lib/api/content.ts:652
-#: packages/admin/src/lib/api/content.ts:657
+#: packages/admin/src/lib/api/content.ts:653
+#: packages/admin/src/lib/api/content.ts:658
 msgid "Failed to fetch revision"
 msgstr "Failed to fetch revision"
 
-#: packages/admin/src/lib/api/content.ts:639
+#: packages/admin/src/lib/api/content.ts:640
 msgid "Failed to fetch revisions"
 msgstr "Failed to fetch revisions"
 
@@ -6128,11 +6128,11 @@ msgstr "Failed to fetch the site domain"
 msgid "Failed to fetch theme"
 msgstr "Failed to fetch theme"
 
-#: packages/admin/src/lib/api/content.ts:113
+#: packages/admin/src/lib/api/content.ts:114
 msgid "Failed to fetch translations"
 msgstr "Failed to fetch translations"
 
-#: packages/admin/src/lib/api/content.ts:375
+#: packages/admin/src/lib/api/content.ts:376
 msgid "Failed to fetch trashed content"
 msgstr "Failed to fetch trashed content"
 
@@ -6336,7 +6336,7 @@ msgstr "Failed to lock the entry"
 msgid "Failed to perform bulk action"
 msgstr "Failed to perform bulk action"
 
-#: packages/admin/src/lib/api/content.ts:397
+#: packages/admin/src/lib/api/content.ts:398
 msgid "Failed to permanently delete content"
 msgstr "Failed to permanently delete content"
 
@@ -6354,7 +6354,7 @@ msgstr "Failed to probe URL"
 msgid "Failed to publish"
 msgstr "Failed to publish"
 
-#: packages/admin/src/lib/api/content.ts:529
+#: packages/admin/src/lib/api/content.ts:530
 msgid "Failed to publish content"
 msgstr "Failed to publish content"
 
@@ -6366,7 +6366,7 @@ msgstr "Failed to read byline field usage"
 msgid "Failed to register {slug}"
 msgstr "Failed to register {slug}"
 
-#: packages/admin/src/lib/api/schema.ts:548
+#: packages/admin/src/lib/api/schema.ts:551
 msgid "Failed to register orphaned table"
 msgstr "Failed to register orphaned table"
 
@@ -6396,11 +6396,11 @@ msgstr "Failed to rename passkey"
 msgid "Failed to reorder byline fields"
 msgstr "Failed to reorder byline fields"
 
-#: packages/admin/src/lib/api/schema.ts:505
+#: packages/admin/src/lib/api/schema.ts:508
 msgid "Failed to reorder content types"
 msgstr "Failed to reorder content types"
 
-#: packages/admin/src/lib/api/schema.ts:488
+#: packages/admin/src/lib/api/schema.ts:491
 #: packages/admin/src/routes/byline-schema.tsx:152
 msgid "Failed to reorder fields"
 msgstr "Failed to reorder fields"
@@ -6425,12 +6425,12 @@ msgstr "Failed to replace media image"
 msgid "Failed to restore"
 msgstr "Failed to restore"
 
-#: packages/admin/src/lib/api/content.ts:386
+#: packages/admin/src/lib/api/content.ts:387
 msgid "Failed to restore content"
 msgstr "Failed to restore content"
 
-#: packages/admin/src/lib/api/content.ts:674
-#: packages/admin/src/lib/api/content.ts:679
+#: packages/admin/src/lib/api/content.ts:675
+#: packages/admin/src/lib/api/content.ts:680
 msgid "Failed to restore revision"
 msgstr "Failed to restore revision"
 
@@ -6468,7 +6468,7 @@ msgstr "Failed to save settings"
 msgid "Failed to schedule"
 msgstr "Failed to schedule"
 
-#: packages/admin/src/lib/api/content.ts:433
+#: packages/admin/src/lib/api/content.ts:434
 msgid "Failed to schedule content"
 msgstr "Failed to schedule content"
 
@@ -6512,7 +6512,7 @@ msgstr "Failed to uninstall plugin"
 msgid "Failed to unpublish"
 msgstr "Failed to unpublish"
 
-#: packages/admin/src/lib/api/content.ts:552
+#: packages/admin/src/lib/api/content.ts:553
 msgid "Failed to unpublish content"
 msgstr "Failed to unpublish content"
 
@@ -6520,7 +6520,7 @@ msgstr "Failed to unpublish content"
 msgid "Failed to unschedule"
 msgstr "Failed to unschedule"
 
-#: packages/admin/src/lib/api/content.ts:454
+#: packages/admin/src/lib/api/content.ts:455
 msgid "Failed to unschedule content"
 msgstr "Failed to unschedule content"
 
@@ -6541,7 +6541,7 @@ msgstr "Failed to update allowed domain"
 msgid "Failed to update backup settings"
 msgstr "Failed to update backup settings"
 
-#: packages/admin/src/lib/api/schema.ts:299
+#: packages/admin/src/lib/api/schema.ts:302
 msgid "Failed to update block type"
 msgstr "Failed to update block type"
 
@@ -6553,7 +6553,7 @@ msgstr "Failed to update byline"
 msgid "Failed to update byline field"
 msgstr "Failed to update byline field"
 
-#: packages/admin/src/lib/api/schema.ts:390
+#: packages/admin/src/lib/api/schema.ts:393
 msgid "Failed to update collection"
 msgstr "Failed to update collection"
 
@@ -6561,7 +6561,7 @@ msgstr "Failed to update collection"
 msgid "Failed to update comment status"
 msgstr "Failed to update comment status"
 
-#: packages/admin/src/lib/api/content.ts:330
+#: packages/admin/src/lib/api/content.ts:331
 msgid "Failed to update content"
 msgstr "Failed to update content"
 
@@ -6569,7 +6569,7 @@ msgstr "Failed to update content"
 msgid "Failed to update domain"
 msgstr "Failed to update domain"
 
-#: packages/admin/src/lib/api/schema.ts:455
+#: packages/admin/src/lib/api/schema.ts:458
 msgid "Failed to update field"
 msgstr "Failed to update field"
 
@@ -8970,14 +8970,14 @@ msgstr "Move to trash"
 
 #: packages/admin/src/components/ContentList.tsx:672
 #: packages/admin/src/components/ContentList.tsx:1552
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1366
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1386
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1369
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1389
 msgid "Move to Trash"
 msgstr "Move to Trash"
 
 #: packages/admin/src/components/ContentList.tsx:650
 #: packages/admin/src/components/ContentList.tsx:1537
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1371
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1374
 msgid "Move to Trash?"
 msgstr "Move to Trash?"
 
@@ -10016,7 +10016,7 @@ msgstr "Original:"
 msgid "Other"
 msgstr "Other"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1314
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1317
 #: packages/admin/src/components/editor/DocumentOutline.tsx:248
 msgid "Outline"
 msgstr "Outline"
@@ -10037,8 +10037,8 @@ msgstr "Overdue · {lateness}"
 msgid "Overrides the page title in search engine results"
 msgstr "Overrides the page title in search engine results"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1128
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1131
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1134
 msgid "Ownership"
 msgstr "Ownership"
 
@@ -11390,7 +11390,7 @@ msgstr "Repository"
 msgid "Request a new link"
 msgstr "Request a new link"
 
-#: packages/admin/src/lib/api/client.ts:342
+#: packages/admin/src/lib/api/client.ts:343
 msgid "Request failed"
 msgstr "Request failed"
 
@@ -11661,7 +11661,7 @@ msgstr "Review Verified Update"
 msgid "Reviewing…"
 msgstr "Reviewing…"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1338
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1341
 #: packages/admin/src/components/ContentTypeEditor.tsx:96
 #: packages/admin/src/components/RevisionHistory.tsx:57
 #: packages/admin/src/components/settings/transfer/labels.ts:22
@@ -12548,8 +12548,8 @@ msgstr "Send Test Email"
 msgid "Sending..."
 msgstr "Sending..."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1227
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1230
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1233
 #: packages/admin/src/components/ContentTypeEditor.tsx:643
 #: packages/admin/src/components/Settings.tsx:66
 msgid "SEO"
@@ -12732,7 +12732,7 @@ msgstr "Showing {pageShowingRange} of {0}"
 msgid "Shown in the admin. Some themes also show it on the site."
 msgstr "Shown in the admin. Some themes also show it on the site."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1152
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1155
 msgid "Shown to readers in this order."
 msgstr "Shown to readers in this order."
 
@@ -13320,7 +13320,7 @@ msgstr "Target"
 msgid "Target locale"
 msgstr "Target locale"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1214
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1217
 #: packages/admin/src/components/settings/transfer/labels.ts:13
 #: packages/admin/src/components/TaxonomySidebar.tsx:898
 msgid "Taxonomies"
@@ -14257,7 +14257,7 @@ msgstr "This video can't be played."
 msgid "This will delete the widget area and all its widgets. This action cannot be undone."
 msgstr "This will delete the widget area and all its widgets. This action cannot be undone."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1373
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1376
 msgid "This will move the item to trash. You can restore it later from the trash."
 msgstr "This will move the item to trash. You can restore it later from the trash."
 
@@ -14433,7 +14433,7 @@ msgstr "Translating..."
 msgid "Translation created"
 msgstr "Translation created"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1192
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1195
 #: packages/admin/src/components/TranslationsPanel.tsx:60
 msgid "Translations"
 msgstr "Translations"
@@ -14624,8 +14624,8 @@ msgstr "TypeScript"
 msgid "Unable to reach marketplace"
 msgstr "Unable to reach marketplace"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1409
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1426
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1412
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1429
 msgid "Unassigned"
 msgstr "Unassigned"
 
@@ -14992,6 +14992,10 @@ msgstr "URL & language"
 #: packages/admin/src/components/ContentTypeEditor.tsx:536
 msgid "URL Pattern"
 msgstr "URL Pattern"
+
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1085
+msgid "URL segment"
+msgstr "URL segment"
 
 #: packages/admin/src/components/Widgets.tsx:132
 msgid "URL template (e.g. /blog/:slug)"
@@ -15459,7 +15463,7 @@ msgstr "Which content types can use this taxonomy"
 msgid "Whole number"
 msgstr "Whole number"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1165
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1168
 msgid "Why are bylines shown in this order?"
 msgstr "Why are bylines shown in this order?"
 
@@ -15467,7 +15471,7 @@ msgstr "Why are bylines shown in this order?"
 msgid "Why can't this be changed?"
 msgstr "Why can't this be changed?"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1111
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1114
 msgid "Why English is used"
 msgstr "Why English is used"
 

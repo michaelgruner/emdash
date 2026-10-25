@@ -2049,7 +2049,7 @@ msgstr "การยืนยันตัวตนถูกยกเลิกห
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:80
 #: packages/admin/src/components/comments/CommentInbox.tsx:325
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1417
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1420
 #: packages/admin/src/components/RelationForm.tsx:315
 #: packages/admin/src/components/users/roleDefinitions.ts:30
 #: packages/admin/src/components/WelcomeModal.tsx:27
@@ -2456,8 +2456,8 @@ msgstr "อัปเดตชื่อผู้เขียนแล้ว"
 
 #: packages/admin/src/components/BylineFilter.tsx:145
 #: packages/admin/src/components/calendar/CalendarEntryPanel.tsx:339
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1143
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1147
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1146
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1150
 #: packages/admin/src/components/settings/transfer/labels.ts:19
 #: packages/admin/src/components/settings/transfer/labels.ts:79
 #: packages/admin/src/components/Sidebar.tsx:454
@@ -2512,7 +2512,7 @@ msgstr "สามารถดูเนื้อหาได้"
 #: packages/admin/src/components/ContentPickerModal.tsx:386
 #: packages/admin/src/components/ContentSettingsPanel.tsx:358
 #: packages/admin/src/components/ContentSettingsPanel.tsx:549
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1379
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1382
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:605
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:818
 #: packages/admin/src/components/editor/PluginBlockNode.tsx:391
@@ -3367,7 +3367,7 @@ msgstr "ID เนื้อหา:"
 msgid "Content is now live"
 msgstr "เนื้อหาเผยแพร่แล้ว"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1093
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1096
 msgid "Content language"
 msgstr "ภาษาของเนื้อหา"
 
@@ -5294,7 +5294,7 @@ msgstr "เปิดใช้งานการติดตามเพื่อ
 msgid "Enabled"
 msgstr "เปิดใช้งาน"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1098
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1101
 msgid "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 msgstr "ใช้ภาษาอังกฤษเนื่องจากยังไม่ได้กำหนดค่าภาษาของเนื้อหา ภาษาของเนื้อหาจะเก็บไว้กับรายการและแยกจากภาษาของหน้าผู้ดูแล"
 
@@ -5571,7 +5571,7 @@ msgstr "การตรวจสอบความปลอดภัยล้ม
 msgid "Failed to abandon import"
 msgstr "ละทิ้งการนำเข้าไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:319
+#: packages/admin/src/lib/api/schema.ts:322
 msgid "Failed to activate block type version"
 msgstr ""
 
@@ -5620,7 +5620,7 @@ msgstr ""
 msgid "Failed to communicate with plugin"
 msgstr "สื่อสารกับปลั๊กอินไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:594
+#: packages/admin/src/lib/api/content.ts:595
 msgid "Failed to compare revisions"
 msgstr ""
 
@@ -5663,7 +5663,7 @@ msgstr ""
 msgid "Failed to create backup"
 msgstr "สร้างข้อมูลสำรองไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:283
+#: packages/admin/src/lib/api/schema.ts:286
 msgid "Failed to create block type"
 msgstr ""
 
@@ -5679,15 +5679,15 @@ msgstr "สร้างฟิลด์ชื่อผู้เขียนไม
 msgid "Failed to create byline translation"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:371
+#: packages/admin/src/lib/api/schema.ts:374
 msgid "Failed to create collection"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:306
+#: packages/admin/src/lib/api/content.ts:307
 msgid "Failed to create content"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:432
+#: packages/admin/src/lib/api/schema.ts:435
 #: packages/admin/src/routes/byline-schema.tsx:102
 msgid "Failed to create field"
 msgstr "สร้างฟิลด์ไม่สำเร็จ"
@@ -5773,7 +5773,7 @@ msgstr "ลบชื่อผู้เขียนไม่สำเร็จ"
 msgid "Failed to delete byline field"
 msgstr "ลบฟิลด์ชื่อผู้เขียนไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:403
+#: packages/admin/src/lib/api/schema.ts:406
 msgid "Failed to delete collection"
 msgstr "ลบคอลเลกชันไม่สำเร็จ"
 
@@ -5782,11 +5782,11 @@ msgstr "ลบคอลเลกชันไม่สำเร็จ"
 msgid "Failed to delete comment"
 msgstr "ลบความคิดเห็นไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:349
+#: packages/admin/src/lib/api/content.ts:350
 msgid "Failed to delete content"
 msgstr "ลบเนื้อหาไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:473
+#: packages/admin/src/lib/api/schema.ts:476
 #: packages/admin/src/routes/byline-schema.tsx:138
 msgid "Failed to delete field"
 msgstr "ลบฟิลด์ไม่สำเร็จ"
@@ -5864,7 +5864,7 @@ msgstr "ปิดใช้งานผู้ใช้ไม่สำเร็จ
 msgid "Failed to discard changes"
 msgstr "ละทิ้งการเปลี่ยนแปลงไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:573
+#: packages/admin/src/lib/api/content.ts:574
 msgid "Failed to discard draft"
 msgstr ""
 
@@ -5885,7 +5885,7 @@ msgstr "ดาวน์โหลดไฟล์แพ็กเกจไม่ส
 msgid "Failed to duplicate"
 msgstr "ทำสำเนาไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:409
+#: packages/admin/src/lib/api/content.ts:410
 msgid "Failed to duplicate content"
 msgstr ""
 
@@ -5922,7 +5922,7 @@ msgstr ""
 msgid "Failed to fetch API tokens"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:371
+#: packages/admin/src/lib/api/client.ts:372
 msgid "Failed to fetch auth mode"
 msgstr "ดึงข้อมูลโหมดการยืนยันตัวตนไม่สำเร็จ"
 
@@ -5930,11 +5930,11 @@ msgstr "ดึงข้อมูลโหมดการยืนยันตั
 msgid "Failed to fetch backup settings"
 msgstr "ดึงข้อมูลการตั้งค่าการสำรองข้อมูลไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:270
+#: packages/admin/src/lib/api/schema.ts:273
 msgid "Failed to fetch block type"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:261
+#: packages/admin/src/lib/api/schema.ts:264
 msgid "Failed to fetch block types"
 msgstr ""
 
@@ -5950,12 +5950,12 @@ msgstr ""
 msgid "Failed to fetch bylines"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:351
-#: packages/admin/src/lib/api/schema.ts:355
+#: packages/admin/src/lib/api/schema.ts:354
+#: packages/admin/src/lib/api/schema.ts:358
 msgid "Failed to fetch collection"
 msgstr "ดึงข้อมูลคอลเลกชันไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:331
+#: packages/admin/src/lib/api/schema.ts:334
 msgid "Failed to fetch collections"
 msgstr ""
 
@@ -5971,12 +5971,12 @@ msgstr ""
 msgid "Failed to fetch comments"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:237
-#: packages/admin/src/lib/api/content.ts:277
+#: packages/admin/src/lib/api/content.ts:238
+#: packages/admin/src/lib/api/content.ts:278
 msgid "Failed to fetch content"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:258
+#: packages/admin/src/lib/api/content.ts:259
 msgid "Failed to fetch content authors"
 msgstr ""
 
@@ -5992,11 +5992,11 @@ msgstr "ดึงข้อมูลการตั้งค่าอีเมล
 msgid "Failed to fetch entry terms"
 msgstr "ดึงข้อมูลเทอมของรายการไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:413
+#: packages/admin/src/lib/api/schema.ts:416
 msgid "Failed to fetch fields"
 msgstr ""
 
-#: packages/admin/src/lib/api/client.ts:354
+#: packages/admin/src/lib/api/client.ts:355
 msgid "Failed to fetch manifest"
 msgstr "ดึงข้อมูล manifest ไม่สำเร็จ"
 
@@ -6036,7 +6036,7 @@ msgstr ""
 msgid "Failed to fetch menus"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:525
+#: packages/admin/src/lib/api/schema.ts:528
 msgid "Failed to fetch orphaned tables"
 msgstr ""
 
@@ -6082,12 +6082,12 @@ msgstr ""
 msgid "Failed to fetch relations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:652
-#: packages/admin/src/lib/api/content.ts:657
+#: packages/admin/src/lib/api/content.ts:653
+#: packages/admin/src/lib/api/content.ts:658
 msgid "Failed to fetch revision"
 msgstr "ดึงข้อมูลรุ่นแก้ไขไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:639
+#: packages/admin/src/lib/api/content.ts:640
 msgid "Failed to fetch revisions"
 msgstr ""
 
@@ -6128,11 +6128,11 @@ msgstr ""
 msgid "Failed to fetch theme"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:113
+#: packages/admin/src/lib/api/content.ts:114
 msgid "Failed to fetch translations"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:375
+#: packages/admin/src/lib/api/content.ts:376
 msgid "Failed to fetch trashed content"
 msgstr ""
 
@@ -6336,7 +6336,7 @@ msgstr "ล็อกรายการไม่สำเร็จ"
 msgid "Failed to perform bulk action"
 msgstr "ดำเนินการแบบกลุ่มไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:397
+#: packages/admin/src/lib/api/content.ts:398
 msgid "Failed to permanently delete content"
 msgstr "ลบเนื้อหาอย่างถาวรไม่สำเร็จ"
 
@@ -6354,7 +6354,7 @@ msgstr ""
 msgid "Failed to publish"
 msgstr "เผยแพร่ไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:529
+#: packages/admin/src/lib/api/content.ts:530
 msgid "Failed to publish content"
 msgstr ""
 
@@ -6366,7 +6366,7 @@ msgstr "อ่านข้อมูลการใช้งานฟิลด์
 msgid "Failed to register {slug}"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:548
+#: packages/admin/src/lib/api/schema.ts:551
 msgid "Failed to register orphaned table"
 msgstr ""
 
@@ -6396,11 +6396,11 @@ msgstr "เปลี่ยนชื่อ Passkey ไม่สำเร็จ"
 msgid "Failed to reorder byline fields"
 msgstr "จัดลำดับฟิลด์ชื่อผู้เขียนใหม่ไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:505
+#: packages/admin/src/lib/api/schema.ts:508
 msgid "Failed to reorder content types"
 msgstr "จัดลำดับประเภทเนื้อหาใหม่ไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:488
+#: packages/admin/src/lib/api/schema.ts:491
 #: packages/admin/src/routes/byline-schema.tsx:152
 msgid "Failed to reorder fields"
 msgstr "จัดเรียงฟิลด์ใหม่ไม่สำเร็จ"
@@ -6425,12 +6425,12 @@ msgstr "แทนที่รูปภาพมีเดียไม่สำเ
 msgid "Failed to restore"
 msgstr "กู้คืนไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:386
+#: packages/admin/src/lib/api/content.ts:387
 msgid "Failed to restore content"
 msgstr "กู้คืนเนื้อหาไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:674
-#: packages/admin/src/lib/api/content.ts:679
+#: packages/admin/src/lib/api/content.ts:675
+#: packages/admin/src/lib/api/content.ts:680
 msgid "Failed to restore revision"
 msgstr "กู้คืนรุ่นแก้ไขไม่สำเร็จ"
 
@@ -6468,7 +6468,7 @@ msgstr "บันทึกการตั้งค่าไม่สำเร็
 msgid "Failed to schedule"
 msgstr "กำหนดเวลาไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:433
+#: packages/admin/src/lib/api/content.ts:434
 msgid "Failed to schedule content"
 msgstr ""
 
@@ -6512,7 +6512,7 @@ msgstr "ถอนการติดตั้งปลั๊กอินไม่
 msgid "Failed to unpublish"
 msgstr "ยกเลิกการเผยแพร่ไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:552
+#: packages/admin/src/lib/api/content.ts:553
 msgid "Failed to unpublish content"
 msgstr ""
 
@@ -6520,7 +6520,7 @@ msgstr ""
 msgid "Failed to unschedule"
 msgstr "ยกเลิกการกำหนดเวลาไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/content.ts:454
+#: packages/admin/src/lib/api/content.ts:455
 msgid "Failed to unschedule content"
 msgstr ""
 
@@ -6541,7 +6541,7 @@ msgstr ""
 msgid "Failed to update backup settings"
 msgstr "อัปเดตการตั้งค่าการสำรองข้อมูลไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:299
+#: packages/admin/src/lib/api/schema.ts:302
 msgid "Failed to update block type"
 msgstr ""
 
@@ -6553,7 +6553,7 @@ msgstr ""
 msgid "Failed to update byline field"
 msgstr "อัปเดตฟิลด์ชื่อผู้เขียนไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:390
+#: packages/admin/src/lib/api/schema.ts:393
 msgid "Failed to update collection"
 msgstr ""
 
@@ -6561,7 +6561,7 @@ msgstr ""
 msgid "Failed to update comment status"
 msgstr ""
 
-#: packages/admin/src/lib/api/content.ts:330
+#: packages/admin/src/lib/api/content.ts:331
 msgid "Failed to update content"
 msgstr ""
 
@@ -6569,7 +6569,7 @@ msgstr ""
 msgid "Failed to update domain"
 msgstr "อัปเดตโดเมนไม่สำเร็จ"
 
-#: packages/admin/src/lib/api/schema.ts:455
+#: packages/admin/src/lib/api/schema.ts:458
 msgid "Failed to update field"
 msgstr ""
 
@@ -8970,14 +8970,14 @@ msgstr "ย้ายไปถังขยะ"
 
 #: packages/admin/src/components/ContentList.tsx:672
 #: packages/admin/src/components/ContentList.tsx:1552
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1366
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1386
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1369
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1389
 msgid "Move to Trash"
 msgstr "ย้ายไปยังถังขยะ"
 
 #: packages/admin/src/components/ContentList.tsx:650
 #: packages/admin/src/components/ContentList.tsx:1537
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1371
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1374
 msgid "Move to Trash?"
 msgstr "ย้ายไปยังถังขยะ?"
 
@@ -10016,7 +10016,7 @@ msgstr "ต้นฉบับ:"
 msgid "Other"
 msgstr "อื่น ๆ"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1314
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1317
 #: packages/admin/src/components/editor/DocumentOutline.tsx:248
 msgid "Outline"
 msgstr "โครงร่าง"
@@ -10037,8 +10037,8 @@ msgstr "เลยกำหนด · {lateness}"
 msgid "Overrides the page title in search engine results"
 msgstr "แทนที่ชื่อหน้าในผลการค้นหาของเครื่องมือค้นหา"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1128
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1131
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1134
 msgid "Ownership"
 msgstr "ความเป็นเจ้าของ"
 
@@ -11390,7 +11390,7 @@ msgstr "ที่เก็บข้อมูล"
 msgid "Request a new link"
 msgstr "ขอลิงก์ใหม่"
 
-#: packages/admin/src/lib/api/client.ts:342
+#: packages/admin/src/lib/api/client.ts:343
 msgid "Request failed"
 msgstr "คำขอไม่สำเร็จ"
 
@@ -11661,7 +11661,7 @@ msgstr "ตรวจสอบการอัปเดตที่ยืนยั
 msgid "Reviewing…"
 msgstr "กำลังตรวจสอบ…"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1338
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1341
 #: packages/admin/src/components/ContentTypeEditor.tsx:96
 #: packages/admin/src/components/RevisionHistory.tsx:57
 #: packages/admin/src/components/settings/transfer/labels.ts:22
@@ -12548,8 +12548,8 @@ msgstr "ส่งอีเมลทดสอบ"
 msgid "Sending..."
 msgstr "กำลังส่ง..."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1227
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1230
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1233
 #: packages/admin/src/components/ContentTypeEditor.tsx:643
 #: packages/admin/src/components/Settings.tsx:66
 msgid "SEO"
@@ -12732,7 +12732,7 @@ msgstr "แสดง {pageShowingRange} จาก {0}"
 msgid "Shown in the admin. Some themes also show it on the site."
 msgstr ""
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1152
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1155
 msgid "Shown to readers in this order."
 msgstr "แสดงต่อผู้อ่านตามลำดับนี้"
 
@@ -13320,7 +13320,7 @@ msgstr "เป้าหมาย"
 msgid "Target locale"
 msgstr "ภาษาเป้าหมาย"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1214
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1217
 #: packages/admin/src/components/settings/transfer/labels.ts:13
 #: packages/admin/src/components/TaxonomySidebar.tsx:898
 msgid "Taxonomies"
@@ -14257,7 +14257,7 @@ msgstr ""
 msgid "This will delete the widget area and all its widgets. This action cannot be undone."
 msgstr "การดำเนินการนี้จะลบพื้นที่วิดเจ็ตและวิดเจ็ตทั้งหมดในนั้น การดำเนินการนี้ไม่สามารถยกเลิกได้"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1373
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1376
 msgid "This will move the item to trash. You can restore it later from the trash."
 msgstr "การดำเนินการนี้จะย้ายรายการไปยังถังขยะ คุณสามารถกู้คืนได้ในภายหลังจากถังขยะ"
 
@@ -14433,7 +14433,7 @@ msgstr "กำลังแปล..."
 msgid "Translation created"
 msgstr "สร้างคำแปลแล้ว"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1192
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1195
 #: packages/admin/src/components/TranslationsPanel.tsx:60
 msgid "Translations"
 msgstr "คำแปล"
@@ -14624,8 +14624,8 @@ msgstr "TypeScript"
 msgid "Unable to reach marketplace"
 msgstr "ไม่สามารถเชื่อมต่อกับมาร์เก็ตเพลซได้"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1409
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1426
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1412
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1429
 msgid "Unassigned"
 msgstr "ยังไม่ได้กำหนด"
 
@@ -14992,6 +14992,10 @@ msgstr "URL และภาษา"
 #: packages/admin/src/components/ContentTypeEditor.tsx:536
 msgid "URL Pattern"
 msgstr "รูปแบบ URL"
+
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1085
+msgid "URL segment"
+msgstr ""
 
 #: packages/admin/src/components/Widgets.tsx:132
 msgid "URL template (e.g. /blog/:slug)"
@@ -15459,7 +15463,7 @@ msgstr "ประเภทเนื้อหาใดบ้างที่ใช
 msgid "Whole number"
 msgstr "จำนวนเต็ม"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1165
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1168
 msgid "Why are bylines shown in this order?"
 msgstr "ทำไมชื่อผู้เขียนจึงแสดงตามลำดับนี้?"
 
@@ -15467,7 +15471,7 @@ msgstr "ทำไมชื่อผู้เขียนจึงแสดงต
 msgid "Why can't this be changed?"
 msgstr "ทำไมจึงเปลี่ยนสิ่งนี้ไม่ได้?"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1111
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1114
 msgid "Why English is used"
 msgstr "ทำไมจึงใช้ภาษาอังกฤษ"
 

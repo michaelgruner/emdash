@@ -362,6 +362,7 @@ export interface ContentItem {
 	id: string;
 	type: string;
 	slug: string | null;
+	draftSlug?: string;
 	status: string;
 	data: Record<string, unknown>;
 	authorId: string | null;

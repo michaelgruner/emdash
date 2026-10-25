@@ -7,6 +7,7 @@ import {
 	decodeCursor,
 	encodeCursor,
 	InvalidCursorError,
+	EmDashValidationError,
 	STAGED_CURSOR_MARKER,
 	type FindManyResult,
 } from "./types.js";
@@ -212,6 +213,17 @@ export class RelationRepository {
 	async update(id: string, input: UpdateRelationInput): Promise<Relation | null> {
 		const existing = await this.findById(id);
 		if (!existing) return null;
+		if (input.maxParentsPerChild !== undefined && input.maxParentsPerChild !== 1) {
+			const hierarchy = await this.db
+				.selectFrom("_emdash_collections")
+				.select("slug")
+				.where("hierarchy_relation", "=", existing.slug)
+				.executeTakeFirst();
+			if (hierarchy)
+				throw new EmDashValidationError(
+					"A hierarchy relation must allow exactly one parent per child",
+				);
+		}
 
 		const updates: Record<string, unknown> = {};
 		if (input.parentLabel !== undefined) updates.parent_label = input.parentLabel;
@@ -231,7 +243,25 @@ export class RelationRepository {
 
 		if (Object.keys(updates).length > 0) {
 			updates.updated_at = new Date().toISOString();
-			await this.db.updateTable("_emdash_relations").set(updates).where("id", "=", id).execute();
+			let query = this.db.updateTable("_emdash_relations").set(updates).where("id", "=", id);
+			if (input.maxParentsPerChild !== undefined && input.maxParentsPerChild !== 1) {
+				query = query.where((eb) =>
+					eb.not(
+						eb.exists(
+							eb
+								.selectFrom("_emdash_collections")
+								.select("id")
+								.whereRef("hierarchy_relation", "=", "_emdash_relations.slug"),
+						),
+					),
+				);
+			}
+			const result = await query.executeTakeFirst();
+			if (result.numUpdatedRows === 0n && (await this.findById(id))) {
+				throw new EmDashValidationError(
+					"A hierarchy relation must allow exactly one parent per child",
+				);
+			}
 		}
 
 		return this.findById(id);
@@ -244,14 +274,35 @@ export class RelationRepository {
 	async delete(id: string): Promise<boolean> {
 		const relation = await this.findById(id);
 		if (!relation) return false;
-
-		await this.db.deleteFrom("_emdash_content_references").where("relation_id", "=", id).execute();
+		const hierarchy = await this.db
+			.selectFrom("_emdash_collections")
+			.select("slug")
+			.where("hierarchy_relation", "=", relation.slug)
+			.executeTakeFirst();
+		if (hierarchy)
+			throw new EmDashValidationError("A relation used for hierarchical URLs cannot be deleted");
 
 		const result = await this.db
 			.deleteFrom("_emdash_relations")
 			.where("id", "=", id)
+			.where((eb) =>
+				eb.not(
+					eb.exists(
+						eb
+							.selectFrom("_emdash_collections")
+							.select("id")
+							.whereRef("hierarchy_relation", "=", "_emdash_relations.slug"),
+					),
+				),
+			)
 			.executeTakeFirst();
-		return (result.numDeletedRows ?? 0n) > 0n;
+		if ((result.numDeletedRows ?? 0n) === 0n) {
+			if (await this.findById(id))
+				throw new EmDashValidationError("A relation used for hierarchical URLs cannot be deleted");
+			return false;
+		}
+		await this.db.deleteFrom("_emdash_content_references").where("relation_id", "=", id).execute();
+		return true;
 	}
 
 	/**

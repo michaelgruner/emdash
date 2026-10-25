@@ -279,6 +279,8 @@ export interface Collection {
 	dateField?: string;
 	/** URL pattern with {slug} placeholder (e.g. "/{slug}", "/blog/{slug}") */
 	urlPattern?: string;
+	/** Self-relation whose ordered parent/child edges define canonical paths. */
+	hierarchyRelation?: string;
 	/** Whether published entries require a public slug. Defaults to true. */
 	routable?: boolean;
 	/**
@@ -356,6 +358,8 @@ export interface CreateCollectionInput {
 	supports?: CollectionSupport[];
 	source?: CollectionSource;
 	urlPattern?: string;
+	/** Self-relation whose ordered parent/child edges define canonical paths. */
+	hierarchyRelation?: string;
 	routable?: boolean;
 	hasSeo?: boolean;
 	/** Omit the auto-generated sidebar entry and dashboard quick action (defaults to false) */
@@ -380,6 +384,7 @@ export interface UpdateCollectionInput {
 	admin?: CollectionAdminConfig;
 	supports?: CollectionSupport[];
 	urlPattern?: string | null;
+	hierarchyRelation?: string | null;
 	routable?: boolean;
 	hasSeo?: boolean;
 	/** Omit the auto-generated sidebar entry and dashboard quick action */

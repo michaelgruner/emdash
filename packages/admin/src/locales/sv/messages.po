@@ -2049,7 +2049,7 @@ msgstr "Autentiseringen avbröts eller tog för lång tid. Försök igen."
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:80
 #: packages/admin/src/components/comments/CommentInbox.tsx:325
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1417
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1420
 #: packages/admin/src/components/RelationForm.tsx:315
 #: packages/admin/src/components/users/roleDefinitions.ts:30
 #: packages/admin/src/components/WelcomeModal.tsx:27
@@ -2456,8 +2456,8 @@ msgstr "Skribenten har uppdaterats"
 
 #: packages/admin/src/components/BylineFilter.tsx:145
 #: packages/admin/src/components/calendar/CalendarEntryPanel.tsx:339
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1143
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1147
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1146
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1150
 #: packages/admin/src/components/settings/transfer/labels.ts:19
 #: packages/admin/src/components/settings/transfer/labels.ts:79
 #: packages/admin/src/components/Sidebar.tsx:454
@@ -2512,7 +2512,7 @@ msgstr "Kan visa innehåll"
 #: packages/admin/src/components/ContentPickerModal.tsx:386
 #: packages/admin/src/components/ContentSettingsPanel.tsx:358
 #: packages/admin/src/components/ContentSettingsPanel.tsx:549
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1379
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1382
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:605
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:818
 #: packages/admin/src/components/editor/PluginBlockNode.tsx:391
@@ -3367,7 +3367,7 @@ msgstr "Innehålls-ID:"
 msgid "Content is now live"
 msgstr "Innehållet är nu publicerat"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1093
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1096
 msgid "Content language"
 msgstr "Innehållsspråk"
 
@@ -5294,7 +5294,7 @@ msgstr "Aktivera spårning för att indexera befintligt innehåll och hålla ref
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1098
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1101
 msgid "English is used because no content language is configured. Content language is stored with the entry and is separate from your admin language."
 msgstr "Engelska används eftersom inget innehållsspråk är konfigurerat. Innehållsspråket lagras med posten och är skilt från ditt administrationsspråk."
 
@@ -5571,7 +5571,7 @@ msgstr "Säkerhetsgranskning misslyckades"
 msgid "Failed to abandon import"
 msgstr "Det gick inte att avsluta importen"
 
-#: packages/admin/src/lib/api/schema.ts:319
+#: packages/admin/src/lib/api/schema.ts:322
 msgid "Failed to activate block type version"
 msgstr "Det gick inte att aktivera blocktypsversionen"
 
@@ -5620,7 +5620,7 @@ msgstr "Det gick inte att söka efter uppdateringar"
 msgid "Failed to communicate with plugin"
 msgstr "Det gick inte att kommunicera med tillägget"
 
-#: packages/admin/src/lib/api/content.ts:594
+#: packages/admin/src/lib/api/content.ts:595
 msgid "Failed to compare revisions"
 msgstr "Det gick inte att jämföra revisionerna"
 
@@ -5663,7 +5663,7 @@ msgstr "Det gick inte att skapa API-token"
 msgid "Failed to create backup"
 msgstr "Det gick inte att skapa säkerhetskopia"
 
-#: packages/admin/src/lib/api/schema.ts:283
+#: packages/admin/src/lib/api/schema.ts:286
 msgid "Failed to create block type"
 msgstr "Det gick inte att skapa blocktypen"
 
@@ -5679,15 +5679,15 @@ msgstr "Det gick inte att skapa skribentfältet"
 msgid "Failed to create byline translation"
 msgstr "Det gick inte att skapa översättningen av skribenten"
 
-#: packages/admin/src/lib/api/schema.ts:371
+#: packages/admin/src/lib/api/schema.ts:374
 msgid "Failed to create collection"
 msgstr "Det gick inte att skapa samlingen"
 
-#: packages/admin/src/lib/api/content.ts:306
+#: packages/admin/src/lib/api/content.ts:307
 msgid "Failed to create content"
 msgstr "Det gick inte att skapa innehållet"
 
-#: packages/admin/src/lib/api/schema.ts:432
+#: packages/admin/src/lib/api/schema.ts:435
 #: packages/admin/src/routes/byline-schema.tsx:102
 msgid "Failed to create field"
 msgstr "Det gick inte att skapa fält"
@@ -5773,7 +5773,7 @@ msgstr "Det gick inte att ta bort skribenten"
 msgid "Failed to delete byline field"
 msgstr "Det gick inte att ta bort skribentfältet"
 
-#: packages/admin/src/lib/api/schema.ts:403
+#: packages/admin/src/lib/api/schema.ts:406
 msgid "Failed to delete collection"
 msgstr "Det gick inte att ta bort samlingen"
 
@@ -5782,11 +5782,11 @@ msgstr "Det gick inte att ta bort samlingen"
 msgid "Failed to delete comment"
 msgstr "Det gick inte att ta bort kommentaren"
 
-#: packages/admin/src/lib/api/content.ts:349
+#: packages/admin/src/lib/api/content.ts:350
 msgid "Failed to delete content"
 msgstr "Det gick inte att ta bort innehållet"
 
-#: packages/admin/src/lib/api/schema.ts:473
+#: packages/admin/src/lib/api/schema.ts:476
 #: packages/admin/src/routes/byline-schema.tsx:138
 msgid "Failed to delete field"
 msgstr "Det gick inte att ta bort fältet"
@@ -5864,7 +5864,7 @@ msgstr "Det gick inte att inaktivera användaren"
 msgid "Failed to discard changes"
 msgstr "Det gick inte att kassera ändringarna"
 
-#: packages/admin/src/lib/api/content.ts:573
+#: packages/admin/src/lib/api/content.ts:574
 msgid "Failed to discard draft"
 msgstr "Det gick inte att kassera utkastet"
 
@@ -5885,7 +5885,7 @@ msgstr "Det gick inte att ladda ner en paketfil"
 msgid "Failed to duplicate"
 msgstr "Det gick inte att duplicera"
 
-#: packages/admin/src/lib/api/content.ts:409
+#: packages/admin/src/lib/api/content.ts:410
 msgid "Failed to duplicate content"
 msgstr "Det gick inte att duplicera innehållet"
 
@@ -5922,7 +5922,7 @@ msgstr "Det gick inte att hämta tillåtna domäner"
 msgid "Failed to fetch API tokens"
 msgstr "Det gick inte att hämta API-tokens"
 
-#: packages/admin/src/lib/api/client.ts:371
+#: packages/admin/src/lib/api/client.ts:372
 msgid "Failed to fetch auth mode"
 msgstr "Det gick inte att hämta autentiseringsläge"
 
@@ -5930,11 +5930,11 @@ msgstr "Det gick inte att hämta autentiseringsläge"
 msgid "Failed to fetch backup settings"
 msgstr "Det gick inte att hämta säkerhetskopieringsinställningar"
 
-#: packages/admin/src/lib/api/schema.ts:270
+#: packages/admin/src/lib/api/schema.ts:273
 msgid "Failed to fetch block type"
 msgstr "Det gick inte att hämta blocktypen"
 
-#: packages/admin/src/lib/api/schema.ts:261
+#: packages/admin/src/lib/api/schema.ts:264
 msgid "Failed to fetch block types"
 msgstr "Det gick inte att hämta blocktyper"
 
@@ -5950,12 +5950,12 @@ msgstr "Det gick inte att hämta skribentens översättningar"
 msgid "Failed to fetch bylines"
 msgstr "Det gick inte att hämta skribenter"
 
-#: packages/admin/src/lib/api/schema.ts:351
-#: packages/admin/src/lib/api/schema.ts:355
+#: packages/admin/src/lib/api/schema.ts:354
+#: packages/admin/src/lib/api/schema.ts:358
 msgid "Failed to fetch collection"
 msgstr "Det gick inte att hämta samlingen"
 
-#: packages/admin/src/lib/api/schema.ts:331
+#: packages/admin/src/lib/api/schema.ts:334
 msgid "Failed to fetch collections"
 msgstr "Det gick inte att hämta samlingar"
 
@@ -5971,12 +5971,12 @@ msgstr "Det gick inte att hämta antalet kommentarer"
 msgid "Failed to fetch comments"
 msgstr "Det gick inte att hämta kommentarer"
 
-#: packages/admin/src/lib/api/content.ts:237
-#: packages/admin/src/lib/api/content.ts:277
+#: packages/admin/src/lib/api/content.ts:238
+#: packages/admin/src/lib/api/content.ts:278
 msgid "Failed to fetch content"
 msgstr "Det gick inte att hämta innehållet"
 
-#: packages/admin/src/lib/api/content.ts:258
+#: packages/admin/src/lib/api/content.ts:259
 msgid "Failed to fetch content authors"
 msgstr "Det gick inte att hämta innehållets författare"
 
@@ -5992,11 +5992,11 @@ msgstr "Det gick inte att hämta e-postinställningar"
 msgid "Failed to fetch entry terms"
 msgstr "Det gick inte att hämta termer för posten"
 
-#: packages/admin/src/lib/api/schema.ts:413
+#: packages/admin/src/lib/api/schema.ts:416
 msgid "Failed to fetch fields"
 msgstr "Det gick inte att hämta fält"
 
-#: packages/admin/src/lib/api/client.ts:354
+#: packages/admin/src/lib/api/client.ts:355
 msgid "Failed to fetch manifest"
 msgstr "Det gick inte att hämta manifestet"
 
@@ -6036,7 +6036,7 @@ msgstr "Det gick inte att hämta menyns översättningar"
 msgid "Failed to fetch menus"
 msgstr "Det gick inte att hämta menyer"
 
-#: packages/admin/src/lib/api/schema.ts:525
+#: packages/admin/src/lib/api/schema.ts:528
 msgid "Failed to fetch orphaned tables"
 msgstr "Det gick inte att hämta oregistrerade tabeller"
 
@@ -6082,12 +6082,12 @@ msgstr "Det gick inte att hämta relationen"
 msgid "Failed to fetch relations"
 msgstr "Det gick inte att hämta relationer"
 
-#: packages/admin/src/lib/api/content.ts:652
-#: packages/admin/src/lib/api/content.ts:657
+#: packages/admin/src/lib/api/content.ts:653
+#: packages/admin/src/lib/api/content.ts:658
 msgid "Failed to fetch revision"
 msgstr "Det gick inte att hämta revisionen"
 
-#: packages/admin/src/lib/api/content.ts:639
+#: packages/admin/src/lib/api/content.ts:640
 msgid "Failed to fetch revisions"
 msgstr "Det gick inte att hämta revisioner"
 
@@ -6128,11 +6128,11 @@ msgstr "Det gick inte att hämta webbplatsens domän"
 msgid "Failed to fetch theme"
 msgstr "Det gick inte att hämta temat"
 
-#: packages/admin/src/lib/api/content.ts:113
+#: packages/admin/src/lib/api/content.ts:114
 msgid "Failed to fetch translations"
 msgstr "Det gick inte att hämta översättningar"
 
-#: packages/admin/src/lib/api/content.ts:375
+#: packages/admin/src/lib/api/content.ts:376
 msgid "Failed to fetch trashed content"
 msgstr "Det gick inte att hämta innehållet i papperskorgen"
 
@@ -6336,7 +6336,7 @@ msgstr "Det gick inte att låsa posten"
 msgid "Failed to perform bulk action"
 msgstr "Det gick inte att utföra massåtgärden"
 
-#: packages/admin/src/lib/api/content.ts:397
+#: packages/admin/src/lib/api/content.ts:398
 msgid "Failed to permanently delete content"
 msgstr "Det gick inte att ta bort innehållet permanent"
 
@@ -6354,7 +6354,7 @@ msgstr "Det gick inte att kontrollera URL:en"
 msgid "Failed to publish"
 msgstr "Det gick inte att publicera"
 
-#: packages/admin/src/lib/api/content.ts:529
+#: packages/admin/src/lib/api/content.ts:530
 msgid "Failed to publish content"
 msgstr "Det gick inte att publicera innehållet"
 
@@ -6366,7 +6366,7 @@ msgstr "Det gick inte att läsa hur skribentfältet används"
 msgid "Failed to register {slug}"
 msgstr ""
 
-#: packages/admin/src/lib/api/schema.ts:548
+#: packages/admin/src/lib/api/schema.ts:551
 msgid "Failed to register orphaned table"
 msgstr "Det gick inte att registrera den oregistrerade tabellen"
 
@@ -6396,11 +6396,11 @@ msgstr "Det gick inte att byta namn på passkey"
 msgid "Failed to reorder byline fields"
 msgstr "Det gick inte att ändra ordning på skribentfälten"
 
-#: packages/admin/src/lib/api/schema.ts:505
+#: packages/admin/src/lib/api/schema.ts:508
 msgid "Failed to reorder content types"
 msgstr "Det gick inte att ändra ordning på innehållstyper"
 
-#: packages/admin/src/lib/api/schema.ts:488
+#: packages/admin/src/lib/api/schema.ts:491
 #: packages/admin/src/routes/byline-schema.tsx:152
 msgid "Failed to reorder fields"
 msgstr "Det gick inte att ändra ordning på fält"
@@ -6425,12 +6425,12 @@ msgstr "Det gick inte att ersätta bilden"
 msgid "Failed to restore"
 msgstr "Det gick inte att återställa"
 
-#: packages/admin/src/lib/api/content.ts:386
+#: packages/admin/src/lib/api/content.ts:387
 msgid "Failed to restore content"
 msgstr "Det gick inte att återställa innehållet"
 
-#: packages/admin/src/lib/api/content.ts:674
-#: packages/admin/src/lib/api/content.ts:679
+#: packages/admin/src/lib/api/content.ts:675
+#: packages/admin/src/lib/api/content.ts:680
 msgid "Failed to restore revision"
 msgstr "Det gick inte att återställa revisionen"
 
@@ -6468,7 +6468,7 @@ msgstr "Det gick inte att spara inställningar"
 msgid "Failed to schedule"
 msgstr "Det gick inte att schemalägga"
 
-#: packages/admin/src/lib/api/content.ts:433
+#: packages/admin/src/lib/api/content.ts:434
 msgid "Failed to schedule content"
 msgstr "Det gick inte att schemalägga innehållet"
 
@@ -6512,7 +6512,7 @@ msgstr "Det gick inte att avinstallera tillägget"
 msgid "Failed to unpublish"
 msgstr "Det gick inte att avpublicera"
 
-#: packages/admin/src/lib/api/content.ts:552
+#: packages/admin/src/lib/api/content.ts:553
 msgid "Failed to unpublish content"
 msgstr "Det gick inte att avpublicera innehållet"
 
@@ -6520,7 +6520,7 @@ msgstr "Det gick inte att avpublicera innehållet"
 msgid "Failed to unschedule"
 msgstr "Det gick inte att avboka schemaläggningen"
 
-#: packages/admin/src/lib/api/content.ts:454
+#: packages/admin/src/lib/api/content.ts:455
 msgid "Failed to unschedule content"
 msgstr "Det gick inte att ta bort schemaläggningen"
 
@@ -6541,7 +6541,7 @@ msgstr "Det gick inte att uppdatera den tillåtna domänen"
 msgid "Failed to update backup settings"
 msgstr "Det gick inte att uppdatera säkerhetskopieringsinställningar"
 
-#: packages/admin/src/lib/api/schema.ts:299
+#: packages/admin/src/lib/api/schema.ts:302
 msgid "Failed to update block type"
 msgstr "Det gick inte att uppdatera blocktypen"
 
@@ -6553,7 +6553,7 @@ msgstr "Det gick inte att uppdatera skribenten"
 msgid "Failed to update byline field"
 msgstr "Det gick inte att uppdatera skribentfältet"
 
-#: packages/admin/src/lib/api/schema.ts:390
+#: packages/admin/src/lib/api/schema.ts:393
 msgid "Failed to update collection"
 msgstr "Det gick inte att uppdatera samlingen"
 
@@ -6561,7 +6561,7 @@ msgstr "Det gick inte att uppdatera samlingen"
 msgid "Failed to update comment status"
 msgstr "Det gick inte att uppdatera kommentarens status"
 
-#: packages/admin/src/lib/api/content.ts:330
+#: packages/admin/src/lib/api/content.ts:331
 msgid "Failed to update content"
 msgstr "Det gick inte att uppdatera innehållet"
 
@@ -6569,7 +6569,7 @@ msgstr "Det gick inte att uppdatera innehållet"
 msgid "Failed to update domain"
 msgstr "Det gick inte att uppdatera domänen"
 
-#: packages/admin/src/lib/api/schema.ts:455
+#: packages/admin/src/lib/api/schema.ts:458
 msgid "Failed to update field"
 msgstr "Det gick inte att uppdatera fältet"
 
@@ -8970,14 +8970,14 @@ msgstr "Flytta till papperskorgen"
 
 #: packages/admin/src/components/ContentList.tsx:672
 #: packages/admin/src/components/ContentList.tsx:1552
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1366
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1386
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1369
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1389
 msgid "Move to Trash"
 msgstr "Flytta till papperskorgen"
 
 #: packages/admin/src/components/ContentList.tsx:650
 #: packages/admin/src/components/ContentList.tsx:1537
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1371
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1374
 msgid "Move to Trash?"
 msgstr "Flytta till papperskorgen?"
 
@@ -10016,7 +10016,7 @@ msgstr "Original:"
 msgid "Other"
 msgstr "Övrigt"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1314
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1317
 #: packages/admin/src/components/editor/DocumentOutline.tsx:248
 msgid "Outline"
 msgstr "Disposition"
@@ -10037,8 +10037,8 @@ msgstr "Försenad · {lateness}"
 msgid "Overrides the page title in search engine results"
 msgstr "Åsidosätter sidtiteln i sökmotorresultat"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1128
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1131
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1134
 msgid "Ownership"
 msgstr "Ägarskap"
 
@@ -11390,7 +11390,7 @@ msgstr "Kodarkiv"
 msgid "Request a new link"
 msgstr "Begär en ny länk"
 
-#: packages/admin/src/lib/api/client.ts:342
+#: packages/admin/src/lib/api/client.ts:343
 msgid "Request failed"
 msgstr "Begäran misslyckades"
 
@@ -11661,7 +11661,7 @@ msgstr "Granska verifierad uppdatering"
 msgid "Reviewing…"
 msgstr "Granskar …"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1338
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1341
 #: packages/admin/src/components/ContentTypeEditor.tsx:96
 #: packages/admin/src/components/RevisionHistory.tsx:57
 #: packages/admin/src/components/settings/transfer/labels.ts:22
@@ -12548,8 +12548,8 @@ msgstr "Skicka testmejl"
 msgid "Sending..."
 msgstr "Skickar …"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1227
 #: packages/admin/src/components/ContentSettingsPanel.tsx:1230
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1233
 #: packages/admin/src/components/ContentTypeEditor.tsx:643
 #: packages/admin/src/components/Settings.tsx:66
 msgid "SEO"
@@ -12732,7 +12732,7 @@ msgstr "Visar {pageShowingRange} av {0}"
 msgid "Shown in the admin. Some themes also show it on the site."
 msgstr ""
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1152
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1155
 msgid "Shown to readers in this order."
 msgstr "Visas för läsarna i den här ordningen."
 
@@ -13320,7 +13320,7 @@ msgstr "Mål"
 msgid "Target locale"
 msgstr "Målspråk"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1214
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1217
 #: packages/admin/src/components/settings/transfer/labels.ts:13
 #: packages/admin/src/components/TaxonomySidebar.tsx:898
 msgid "Taxonomies"
@@ -14257,7 +14257,7 @@ msgstr "Videon kan inte spelas upp."
 msgid "This will delete the widget area and all its widgets. This action cannot be undone."
 msgstr "Widgetområdet och alla dess widgetar tas bort. Åtgärden kan inte ångras."
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1373
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1376
 msgid "This will move the item to trash. You can restore it later from the trash."
 msgstr "Objektet flyttas till papperskorgen. Du kan återställa det senare från papperskorgen."
 
@@ -14433,7 +14433,7 @@ msgstr "Översätter …"
 msgid "Translation created"
 msgstr "Översättning skapad"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1192
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1195
 #: packages/admin/src/components/TranslationsPanel.tsx:60
 msgid "Translations"
 msgstr "Översättningar"
@@ -14624,8 +14624,8 @@ msgstr "TypeScript"
 msgid "Unable to reach marketplace"
 msgstr "Kunde inte nå marknadsplatsen"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1409
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1426
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1412
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1429
 msgid "Unassigned"
 msgstr "Otilldelad"
 
@@ -14992,6 +14992,10 @@ msgstr "URL och språk"
 #: packages/admin/src/components/ContentTypeEditor.tsx:536
 msgid "URL Pattern"
 msgstr "URL-mönster"
+
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1085
+msgid "URL segment"
+msgstr ""
 
 #: packages/admin/src/components/Widgets.tsx:132
 msgid "URL template (e.g. /blog/:slug)"
@@ -15459,7 +15463,7 @@ msgstr "Vilka innehållstyper som kan använda den här taxonomin"
 msgid "Whole number"
 msgstr "Heltal"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1165
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1168
 msgid "Why are bylines shown in this order?"
 msgstr "Varför visas skribenterna i den här ordningen?"
 
@@ -15467,7 +15471,7 @@ msgstr "Varför visas skribenterna i den här ordningen?"
 msgid "Why can't this be changed?"
 msgstr "Varför går det inte att ändra?"
 
-#: packages/admin/src/components/ContentSettingsPanel.tsx:1111
+#: packages/admin/src/components/ContentSettingsPanel.tsx:1114
 msgid "Why English is used"
 msgstr "Varför engelska används"
 

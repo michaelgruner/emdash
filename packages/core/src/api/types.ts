@@ -53,6 +53,7 @@ export interface ManifestCollectionDescriptor {
 	supports: string[];
 	hasSeo: boolean;
 	urlPattern?: string;
+	hierarchyRelation?: string;
 	routable?: boolean;
 	titleField?: string;
 	dateField?: string;

@@ -437,6 +437,7 @@ async function exportCollections(db: Kysely<Database>): Promise<SeedCollection[]
 			admin: collection.admin,
 			supports: collection.supports.length > 0 ? collection.supports : undefined,
 			urlPattern: collection.urlPattern || undefined,
+			hierarchyRelation: collection.hierarchyRelation || undefined,
 			routable: collection.routable === false ? false : undefined,
 			editLocking: collection.editLocking === false ? false : undefined,
 			hidden: collection.hidden || undefined,
