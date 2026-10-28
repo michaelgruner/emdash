@@ -81,6 +81,65 @@ export function hierarchyPublicationCases(
 	});
 
 	describe("hierarchical publication", () => {
+		it("preserves sibling order for inverse references to another relation", async () => {
+			await relations.create({
+				slug: "related",
+				parentCollection: "docs",
+				childCollection: "docs",
+				parentLabel: "Parent",
+				childLabel: "Children",
+			});
+			const registry = new SchemaRegistry(db);
+			await registry.createField("docs", {
+				slug: "related_parent",
+				label: "Related parent",
+				type: "reference",
+				validation: { relation: "related", relationSide: "child", targetCollection: "docs" },
+			});
+			const sibling = await repo.create({
+				type: "docs",
+				slug: "sibling",
+				status: "published",
+				data: { title: "Sibling" },
+			});
+			await relations.setChildren("related", parent.translationGroup!, [
+				sibling.translationGroup!,
+				child.translationGroup!,
+			]);
+			const runtime = createTestRuntime(db);
+			expect(
+				await runtime.handleContentUpdate("docs", child.id, {
+					data: {},
+					references: { related_parent: [parent.id] },
+				}),
+			).toMatchObject({ success: true });
+			expect(await runtime.handleContentPublish("docs", child.id)).toMatchObject({ success: true });
+			expect(
+				(await relations.getChildren("related", parent.translationGroup!)).map(
+					(edge) => edge.childGroup,
+				),
+			).toEqual([sibling.translationGroup, child.translationGroup]);
+			const newcomer = await repo.create({
+				type: "docs",
+				slug: "newcomer",
+				status: "published",
+				data: { title: "Newcomer" },
+			});
+			expect(
+				await runtime.handleContentUpdate("docs", newcomer.id, {
+					data: {},
+					references: { related_parent: [parent.id] },
+				}),
+			).toMatchObject({ success: true });
+			expect(await runtime.handleContentPublish("docs", newcomer.id)).toMatchObject({
+				success: true,
+			});
+			expect(
+				(await relations.getChildren("related", parent.translationGroup!)).map(
+					(edge) => edge.childGroup,
+				),
+			).toEqual([sibling.translationGroup, child.translationGroup, newcomer.translationGroup]);
+		});
 		it("renames the subtree and leaves redirects from both previous URLs", async () => {
 			await repo.updateDraftAware("docs", parent.id, {
 				slug: "renamed",

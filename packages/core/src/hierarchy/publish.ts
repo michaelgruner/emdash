@@ -326,14 +326,25 @@ export async function publishHierarchicalContent(
 			: liveGroups;
 		publishedSelections[field.slug] = groups;
 		if (!requested || options.activate) continue;
-		statements.push(
-			sql`DELETE FROM _emdash_content_references WHERE relation_id = ${field.relationId} AND ${sql.ref(column)} = ${root.translationGroup} AND ${applied}`,
-		);
+		for (const group of liveGroups.filter((group) => !groups.includes(group))) {
+			statements.push(sql`DELETE FROM _emdash_content_references WHERE relation_id = ${field.relationId}
+				AND ${sql.ref(column)} = ${root.translationGroup} AND ${sql.ref(opposite)} = ${group} AND ${applied}`);
+		}
 		for (const [order, group] of groups.entries()) {
 			const parent = field.relationSide === "child" ? group : root.translationGroup;
 			const child = field.relationSide === "child" ? root.translationGroup : group;
+			if (liveGroups.includes(group)) {
+				if (field.relationSide === "parent")
+					statements.push(sql`UPDATE _emdash_content_references SET sort_order = ${order}
+					WHERE relation_id = ${field.relationId} AND parent_group = ${parent} AND child_group = ${child} AND ${applied}`);
+				continue;
+			}
+			const position =
+				field.relationSide === "child"
+					? sql`(SELECT COALESCE(MAX(sort_order) + 1, 0) FROM _emdash_content_references WHERE relation_id = ${field.relationId} AND parent_group = ${parent})`
+					: sql`${order}`;
 			statements.push(sql`INSERT INTO _emdash_content_references (id, relation_id, parent_group, child_group, sort_order, created_at)
-				SELECT ${ulid()}, ${field.relationId}, ${parent}, ${child}, ${field.relationSide === "child" ? 0 : order}, ${now} WHERE ${applied}`);
+				SELECT ${ulid()}, ${field.relationId}, ${parent}, ${child}, ${position}, ${now} WHERE ${applied}`);
 		}
 	}
 	snapshot._references = publishedSelections;
