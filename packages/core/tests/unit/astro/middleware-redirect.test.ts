@@ -100,6 +100,7 @@ describe("redirect middleware — issue #808", () => {
 		expect(redirect).toHaveBeenCalledWith("/new", 301);
 		expect(response.status).toBe(301);
 		expect(response.headers.get("Location")).toBe("/new");
+		expect(response.headers.get("Cache-Control")).toBe("no-store");
 		expect(next).not.toHaveBeenCalled();
 	});
 
@@ -653,6 +654,8 @@ describe("redirect middleware — responses the route cache stores", () => {
 
 		expect(response.status).toBe(301);
 		expect(response.headers.get("Location")).toBe("/moved");
+		expect(response.headers.get("Cache-Control")).toBe("no-store");
+		expect(cache.set).toHaveBeenCalledWith(false);
 	});
 
 	it("lets a render it replaces with a redirect run to completion", async () => {

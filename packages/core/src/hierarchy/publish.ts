@@ -326,7 +326,7 @@ export async function publishHierarchicalContent(
 			: liveGroups;
 		publishedSelections[field.slug] = groups;
 		if (!requested || options.activate) continue;
-		for (const group of liveGroups.filter((group) => !groups.includes(group))) {
+		for (const group of liveGroups.filter((candidate) => !groups.includes(candidate))) {
 			statements.push(sql`DELETE FROM _emdash_content_references WHERE relation_id = ${field.relationId}
 				AND ${sql.ref(column)} = ${root.translationGroup} AND ${sql.ref(opposite)} = ${group} AND ${applied}`);
 		}

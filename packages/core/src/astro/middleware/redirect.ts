@@ -95,7 +95,10 @@ function redirectResponse(
 	}
 	recordHitInBackground(repo, redirect.id);
 	const code = isRedirectCode(redirect.type) ? redirect.type : 301;
-	return context.redirect(destination, code);
+	const response = context.redirect(destination, code);
+	// A redirect can be removed when its source becomes a live URL again.
+	response.headers.set("Cache-Control", "no-store");
+	return response;
 }
 
 /** Whether Astro's route cache will store the response: it does once a max age or a tag is set. */
@@ -214,7 +217,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 		if (match) {
 			const redirected = redirectResponse(context, repo, match);
-			if (redirected) return redirected;
+			if (redirected) {
+				routeCache?.set(false);
+				return redirected;
+			}
 		}
 
 		// No redirect matched -- proceed and check for 404.

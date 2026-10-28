@@ -210,6 +210,33 @@ export function hierarchyPublicationCases(
 				{ source: "/docs/product/getting-started", destination: "/docs/renamed/getting-started" },
 			]);
 		});
+		it("restores the original URL when a child is moved back", async () => {
+			const other = await repo.create({
+				type: "docs",
+				slug: "other",
+				status: "published",
+				data: { title: "Other" },
+			});
+			const runtime = createTestRuntime(db);
+			for (const target of [other, parent]) {
+				expect(
+					await runtime.handleContentUpdate("docs", child.id, {
+						data: {},
+						references: { parent: [target.id] },
+					}),
+				).toMatchObject({ success: true });
+				expect(await runtime.handleContentPublish("docs", child.id)).toMatchObject({ success: true });
+			}
+			expect((await repo.findById("docs", child.id))?.slug).toBe("product/getting-started");
+			const redirects = await db
+				.selectFrom("_emdash_redirects")
+				.select(["source", "destination"])
+				.where("source", "in", ["/docs/product/getting-started", "/docs/other/getting-started"])
+				.execute();
+			expect(redirects).toEqual([
+				{ source: "/docs/other/getting-started", destination: "/docs/product/getting-started" },
+			]);
+		});
 		it("preserves sibling order when a child republishes its unchanged parent selection", async () => {
 			const sibling = await repo.create({
 				type: "docs",
