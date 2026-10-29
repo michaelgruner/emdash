@@ -730,6 +730,23 @@ describe("ContentTypeEditor", () => {
 		expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ urlPattern: "/blog/{slug}" }));
 	});
 
+	it("saves comment settings with a hierarchical URL pattern", async () => {
+		const onSave = vi.fn();
+		const collection = makeCollection({ urlPattern: "/products/{path}", commentsEnabled: false });
+		const screen = await render(
+			<ContentTypeEditor {...defaultProps({ onSave })} collection={collection} />,
+		);
+
+		await screen.getByLabelText("Enable comments").click();
+		const saveButton = screen.getByRole("button", { name: "Save", exact: true }).last();
+		await expect.element(saveButton).toBeEnabled();
+		await saveButton.click();
+
+		expect(onSave).toHaveBeenCalledWith(
+			expect.objectContaining({ urlPattern: "/products/{path}", commentsEnabled: true }),
+		);
+	});
+
 	it("saves whether the collection is routable", async () => {
 		const onSave = vi.fn();
 		const collection = makeCollection({ routable: true });

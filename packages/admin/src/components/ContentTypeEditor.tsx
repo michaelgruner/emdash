@@ -228,7 +228,8 @@ export function ContentTypeEditor({
 	const urlPatternSharesSegment =
 		urlPatternChanged && MULTIPLE_PLACEHOLDERS_IN_SEGMENT.test(urlPattern);
 	const urlPatternValid =
-		!urlPattern || (urlPattern.includes("{slug}") && !urlPatternSharesSegment);
+		!urlPattern ||
+		((urlPattern.includes("{slug}") || urlPattern.includes("{path}")) && !urlPatternSharesSegment);
 
 	const slugError =
 		isNew && !slug && label.trim().length > 0
@@ -539,9 +540,9 @@ export function ContentTypeEditor({
 									placeholder={`/${slug === "pages" ? "" : `${slug}/`}{slug}`}
 									disabled={isFromCode}
 								/>
-								{urlPattern && !urlPattern.includes("{slug}") && (
+								{urlPattern && !urlPattern.includes("{slug}") && !urlPattern.includes("{path}") && (
 									<p className="text-xs text-kumo-danger mt-2">
-										{t`Pattern must include a ${"{slug}"} placeholder`}
+										{t`Pattern must include a ${"{slug}"} or ${"{path}"} placeholder`}
 									</p>
 								)}
 								{urlPatternSharesSegment && (
@@ -550,7 +551,7 @@ export function ContentTypeEditor({
 									</p>
 								)}
 								<p className="text-xs text-kumo-subtle mt-1">
-									{t`Pattern for generating URLs, e.g. /blog/${"{slug}"}. Tokens: ${"{slug}"}, ${"{id}"}, and date tokens ${"{year}"}/${"{month}"}/${"{day}"} (also ${"{hour}"}/${"{minute}"}/${"{second}"}) from the publish date — e.g. ${"/{year}/{month}/{day}/{slug}.html"} for WordPress-style permalinks.`}
+									{t`Pattern for generating URLs, e.g. /blog/${"{slug}"} or /products/${"{path}"} for hierarchical content. Tokens: ${"{slug}"}, ${"{path}"}, ${"{id}"}, and date tokens ${"{year}"}/${"{month}"}/${"{day}"} (also ${"{hour}"}/${"{minute}"}/${"{second}"}) from the publish date — e.g. ${"/{year}/{month}/{day}/{slug}.html"} for WordPress-style permalinks.`}
 								</p>
 							</div>
 
