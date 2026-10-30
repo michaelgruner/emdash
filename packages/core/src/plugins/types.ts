@@ -2084,6 +2084,12 @@ export type PortableTextBlockField = Element;
  * Configuration for a Portable Text block type contributed by a plugin
  */
 export interface PortableTextBlockConfig {
+	/** Editable Portable Text content, optionally inside repeating items. */
+	content?: {
+		field: string;
+		legacyField?: string;
+		items?: { field: string; label: string; titleField?: string };
+	};
 	/** Block type name (must match the `_type` in Portable Text) */
 	type: string;
 	/** Human-readable label shown in slash commands and modals */

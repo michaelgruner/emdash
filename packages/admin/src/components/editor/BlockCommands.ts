@@ -88,11 +88,18 @@ export function blockInsertPosition(selection: Selection): number | null {
 	if (selection instanceof NodeSelection && selection.$from.depth === 0) return selection.to;
 	const { $from } = selection;
 	if ($from.depth === 0) return null;
+	let containerDepth = 0;
 	for (let depth = $from.depth; depth > 0; depth--) {
-		const { name } = $from.node(depth).type;
-		if (name === "listItem" || name === "blockquote") return $from.after(1);
+		if ($from.node(depth).type.name === "pluginContent") {
+			containerDepth = depth;
+			break;
+		}
 	}
-	return $from.parent.content.size > 0 ? $from.after(1) : null;
+	for (let depth = $from.depth; depth > containerDepth; depth--) {
+		const { name } = $from.node(depth).type;
+		if (name === "listItem" || name === "blockquote") return $from.after(containerDepth + 1);
+	}
+	return $from.parent.content.size > 0 ? $from.after(containerDepth + 1) : null;
 }
 
 export function duplicateBlocks(editor: Editor, range = selectedBlockRange(editor.state)): boolean {

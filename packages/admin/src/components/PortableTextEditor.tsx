@@ -138,6 +138,12 @@ import {
 	localMediaFileUrl,
 } from "../lib/media-utils.js";
 import {
+	editablePluginNode,
+	pluginBlockSettings,
+	serializePluginContainer,
+	type PluginContentNode,
+} from "../lib/plugin-content.js";
+import {
 	UnsupportedPortableTextMarksError,
 	assertPortableTextMarksSupported,
 	assertProseMirrorMarksSupported,
@@ -202,6 +208,7 @@ import {
 	registerPluginBlocks,
 	resolveIcon,
 } from "./editor/PluginBlockNode";
+import { PluginContainerExtension, PluginContentExtension } from "./editor/PluginContentNode.js";
 import { runTableAction } from "./editor/TableActions.js";
 import { createTableCellSafety, type TablePasteRejection } from "./editor/TableCellSafety.js";
 import { createTableClipboard } from "./editor/TableClipboard.js";
@@ -683,11 +690,12 @@ const PortableTextIdentityExtension = Extension.create({
 					"tableCell",
 					"tableHeader",
 					"pluginBlock",
+					"pluginContainer",
 				],
 				attributes: { [PORTABLE_TEXT_KEY_ATTR]: hiddenAttribute },
 			},
 			{
-				types: ["pluginBlock"],
+				types: ["pluginBlock", "pluginContainer"],
 				attributes: { [PORTABLE_TEXT_BLOCK_ATTR]: hiddenAttribute },
 			},
 		];
@@ -1119,6 +1127,14 @@ function convertPMNode(
 			return result.table;
 		}
 
+		case "pluginContainer":
+			return convertPMNode(
+				serializePluginContainer(node as PluginContentNode, (content) =>
+					prosemirrorToPortableText({ type: "doc", content }),
+				),
+				path,
+			);
+
 		case "pluginBlock": {
 			const attrs = node.attrs ?? {};
 			const blockType = typeof attrs.blockType === "string" ? attrs.blockType : "embed";
@@ -1386,6 +1402,7 @@ function isCodeBlock(block: PortableTextBlock): block is PortableTextCodeBlock {
 function portableTextToProsemirror(
 	blocks: PortableTextBlock[],
 	pluginTypes: ReadonlySet<string> = new Set(),
+	pluginDefinitions: PluginBlockDef[] = [],
 ): {
 	type: "doc";
 	content: unknown[];
@@ -1433,7 +1450,7 @@ function portableTextToProsemirror(
 
 			content.push(convertPTList(listBlocks, listType, `root:${runStart}`));
 		} else {
-			const converted = convertPTBlock(block, `root:${i}`, pluginTypes);
+			const converted = convertPTBlock(block, `root:${i}`, pluginTypes, pluginDefinitions);
 			if (converted) {
 				content.push(converted);
 			}
@@ -1479,6 +1496,7 @@ function convertPTBlock(
 	block: PortableTextBlock,
 	path: string,
 	pluginTypes: ReadonlySet<string>,
+	pluginDefinitions: PluginBlockDef[],
 ): unknown {
 	switch (block._type) {
 		case "block": {
@@ -1607,7 +1625,7 @@ function convertPTBlock(
 		case "gallery": {
 			const galleryBlock = block as { _type: "gallery"; _key: string; [key: string]: unknown };
 			if (!Array.isArray(galleryBlock.images)) {
-				return convertCustomBlock(block);
+				return convertCustomBlock(block, pluginTypes, pluginDefinitions);
 			}
 			return {
 				type: "gallery",
@@ -1633,7 +1651,7 @@ function convertPTBlock(
 						type: "iframeBlock",
 						attrs: attrsWithPortableTextKey({ ...iframeEmbedFromAttrs(block) }, block._key),
 					}
-				: convertCustomBlock(block);
+				: convertCustomBlock(block, pluginTypes, pluginDefinitions);
 
 		case "video":
 			return isVideoBlock(block) && !pluginTypes.has("video")
@@ -1641,7 +1659,7 @@ function convertPTBlock(
 						type: "videoBlock",
 						attrs: attrsWithPortableTextKey(videoNodeAttrs(block), block._key),
 					}
-				: convertCustomBlock(block);
+				: convertCustomBlock(block, pluginTypes, pluginDefinitions);
 
 		case "table": {
 			const result = portableTextTableToProseMirror(block, {
@@ -1657,23 +1675,46 @@ function convertPTBlock(
 		}
 
 		default: {
-			return convertCustomBlock(block);
+			return convertCustomBlock(block, pluginTypes, pluginDefinitions);
 		}
 	}
 }
 
-function convertCustomBlock(block: PortableTextBlock): unknown {
+function convertCustomBlock(
+	block: PortableTextBlock,
+	pluginTypes: ReadonlySet<string>,
+	pluginDefinitions: PluginBlockDef[],
+): unknown {
 	const record = block as Record<string, unknown>;
-	return {
+	const definition = pluginDefinitions.find((item) => item.type === block._type);
+	const node = {
 		type: "pluginBlock",
 		attrs: {
 			blockType: block._type,
 			id: attrStr(record.id) ?? attrStr(record.url) ?? "",
-			data: customBlockData(block),
+			data: {
+				...customBlockData(block),
+				...(definition?.content
+					? Object.fromEntries(
+							Object.entries(record).filter(
+								([key]) => key.startsWith("_") && key !== "_type" && key !== "_key",
+							),
+						)
+					: {}),
+			},
 			[PORTABLE_TEXT_KEY_ATTR]: block._key,
 			[PORTABLE_TEXT_BLOCK_ATTR]: block,
 		},
 	};
+	return definition?.content
+		? editablePluginNode(
+				node,
+				definition,
+				(body) =>
+					portableTextToProsemirror(body as PortableTextBlock[], pluginTypes, pluginDefinitions)
+						.content as PluginContentNode[],
+			)
+		: node;
 }
 
 function convertPTList(
@@ -1947,24 +1988,37 @@ function insertTopLevelBlock(
 	}
 	const { selection } = tr;
 	const { $from } = selection;
+	let contentDepth = 0;
+	for (let depth = $from.depth; depth > 0; depth--) {
+		if ($from.node(depth).type.name === "pluginContent") {
+			contentDepth = depth;
+			break;
+		}
+	}
+	const blockDepth = contentDepth + 1;
 	const atBlockStart =
 		$from.parentOffset === 0 &&
-		Array.from({ length: $from.depth - 1 }, (_, depth) => $from.index(depth + 1)).every(
-			(index) => index === 0,
-		);
+		Array.from({ length: $from.depth - blockDepth }, (_, depth) =>
+			$from.index(depth + blockDepth),
+		).every((index) => index === 0);
 	let at: number;
 	if (position !== undefined) {
 		at = position;
 		tr.insert(at, block);
 	} else if (
-		$from.depth === 1 &&
+		$from.depth === blockDepth &&
 		$from.parent.type.name === "paragraph" &&
 		!$from.parent.childCount
 	) {
-		at = $from.before(1);
-		tr.replaceWith(at, $from.after(1), block);
+		at = $from.before(blockDepth);
+		tr.replaceWith(at, $from.after(blockDepth), block);
 	} else {
-		at = $from.depth === 0 ? selection.to : atBlockStart ? $from.before(1) : $from.after(1);
+		at =
+			$from.depth === 0
+				? selection.to
+				: atBlockStart
+					? $from.before(blockDepth)
+					: $from.after(blockDepth);
 		tr.insert(at, block);
 	}
 	tr.setSelection(NodeSelection.create(tr.doc, at));
@@ -2601,6 +2655,35 @@ function buildPluginBlockFormValues(
 	return initialValues ? { ...defaults, ...initialValues } : defaults;
 }
 
+function insertPluginBlock(
+	editor: Editor,
+	definition: PluginBlockDef,
+	values: Record<string, unknown>,
+	pluginTypes: ReadonlySet<string>,
+	definitions: PluginBlockDef[],
+	position: number | null,
+): boolean {
+	const { id, ...data } = values;
+	const content = editablePluginNode(
+		{
+			type: "pluginBlock",
+			attrs: { blockType: definition.type, id: typeof id === "string" ? id : "", data },
+		},
+		definition,
+		(body) =>
+			portableTextToProsemirror(body as PortableTextBlock[], pluginTypes, definitions)
+				.content as PluginContentNode[],
+	);
+	const chain = editor.chain().focus();
+	return position === null
+		? chain
+				.command(({ tr }) => prepareBlockInsert(tr))
+				.insertContent(content)
+				.scrollIntoView()
+				.run()
+		: chain.insertContentAt(position, content).run();
+}
+
 function hasPluginBlockFormData(values: Record<string, unknown>): boolean {
 	return Object.values(values).some(
 		(value) => value !== undefined && value !== null && value !== "",
@@ -2614,11 +2697,13 @@ function hasPluginBlockFormData(values: Record<string, unknown>): boolean {
  */
 function PluginBlockModal({
 	block,
+	error,
 	initialValues,
 	onClose,
 	onInsert,
 }: {
 	block: PluginBlockDef | null;
+	error?: string | null;
 	/** Pre-populated values when editing an existing block */
 	initialValues?: Record<string, unknown>;
 	onClose: () => void;
@@ -2640,7 +2725,7 @@ function PluginBlockModal({
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
-		if (block?.fields && block.fields.length > 0) {
+		if (block?.content || (block?.fields && block.fields.length > 0)) {
 			onInsert(formValues);
 		} else {
 			const url = typeof formValues.id === "string" ? formValues.id.trim() : "";
@@ -2655,12 +2740,12 @@ function PluginBlockModal({
 	};
 
 	const isEditing = !!initialValues;
-	const hasFields = block?.fields && block.fields.length > 0;
+	const hasFields = !!block?.content || (block?.fields && block.fields.length > 0);
 
 	// For simple URL mode, check if the URL is non-empty
 	// For Block Kit fields, require at least one field to have a value
 	const canSubmit = hasFields
-		? hasPluginBlockFormData(formValues)
+		? !!block?.content || hasPluginBlockFormData(formValues)
 		: typeof formValues.id === "string" && formValues.id.trim().length > 0;
 
 	const dialogSize = hasFields ? "xl" : "sm";
@@ -2689,9 +2774,14 @@ function PluginBlockModal({
 					/>
 				</div>
 				<form onSubmit={handleSubmit}>
+					{error && (
+						<p role="alert" className="mb-3 text-sm text-kumo-danger">
+							{error}
+						</p>
+					)}
 					<div className="py-4 space-y-4 max-h-[70vh] overflow-y-auto -mx-1 px-1">
 						{hasFields ? (
-							block.fields!.map((field) => (
+							(block?.fields ?? []).map((field) => (
 								<BlockKitField
 									key={field.action_id}
 									field={field}
@@ -2713,10 +2803,10 @@ function PluginBlockModal({
 					</div>
 					<div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
 						<Button type="button" variant="ghost" onClick={onClose}>
-							Cancel
+							{t`Cancel`}
 						</Button>
 						<Button type="submit" disabled={!canSubmit}>
-							{isEditing ? "Save" : "Insert"}
+							{isEditing ? t`Save` : t`Insert`}
 						</Button>
 					</div>
 				</form>
@@ -3571,6 +3661,7 @@ export function PortableTextEditor({
 	});
 
 	// Plugin block insertion/editing state
+	const [pluginBlockError, setPluginBlockError] = React.useState<string | null>(null);
 	const [pluginBlockModal, setPluginBlockModal] = React.useState<PluginBlockDef | null>(null);
 	const [pluginBlockInitialValues, setPluginBlockInitialValues] = React.useState<
 		Record<string, unknown> | undefined
@@ -3733,7 +3824,18 @@ export function PortableTextEditor({
 				deferInsertion: true,
 				command: ({ editor, range }) => {
 					editor.chain().focus().deleteRange(range).run();
-					setPluginBlockModal(block);
+					const settings = pluginBlockSettings(block);
+					if (block.content && !settings.fields?.length) {
+						insertPluginBlock(
+							editor,
+							block,
+							getPluginBlockDefaultValues(block.fields),
+							pluginBlockTypes,
+							pluginBlocks,
+							pendingBlockInsertPosRef.current,
+						);
+						pendingBlockInsertPosRef.current = null;
+					} else setPluginBlockModal(settings);
 				},
 			});
 		}
@@ -3744,13 +3846,19 @@ export function PortableTextEditor({
 	// Filter commands by query — accessed via ref so the Suggestion plugin
 	// (created once) always sees the latest command list without needing
 	// the extension to be recreated.
+	const [nestedMediaError, setNestedMediaError] = React.useState(false);
+	const nestedEditorRef = React.useRef<Editor | null>(null);
 	const filterCommandsRef = React.useRef((_q: string): SlashCommandItem[] => []);
 	filterCommandsRef.current = (query: string) => {
+		const nested = nestedEditorRef.current?.isActive("pluginContent");
+		const availableCommands = nested
+			? slashCommands.filter((item) => !["image", "gallery", "video", "section"].includes(item.id))
+			: slashCommands;
 		const text = (label: MessageDescriptor | string) =>
 			typeof label === "string" ? label : t(label);
 		if (!query.trim()) {
 			// The menu groups commands by category, so arrow keys must follow that order.
-			const visible = slashCommands.filter((item) => !item.searchOnly);
+			const visible = availableCommands.filter((item) => !item.searchOnly);
 			const categories = [
 				...new Set(visible.map((item) => text(item.category ?? BASIC_BLOCKS_CATEGORY))),
 			];
@@ -3758,7 +3866,7 @@ export function PortableTextEditor({
 				categories.indexOf(text(item.category ?? BASIC_BLOCKS_CATEGORY));
 			return visible.toSorted((a, b) => rank(a) - rank(b));
 		}
-		return slashCommands
+		return availableCommands
 			.map((item, order) => ({
 				item,
 				order,
@@ -3788,7 +3896,7 @@ export function PortableTextEditor({
 		}
 		try {
 			return {
-				content: portableTextToProsemirror(value || [], pluginBlockTypes),
+				content: portableTextToProsemirror(value || [], pluginBlockTypes, pluginBlocks),
 				tableError: null,
 			};
 		} catch (error) {
@@ -3894,11 +4002,14 @@ export function PortableTextEditor({
 			ImageExtension,
 			ImageUploadExtension.configure({
 				upload: (file, signal) => uploadImageRef.current(file, signal),
+				onBlockedMedia: () => setNestedMediaError(true),
 				// A plugin's own video block replaces the built-in one.
 				acceptsVideo: () => !pluginBlockTypesRef.current.has("video"),
 			}),
 			MarkdownLinkExtension,
 			PluginBlockExtension,
+			PluginContainerExtension,
+			PluginContentExtension.configure({ onBlockedMedia: () => setNestedMediaError(true) }),
 			Subscript.extend({ excludes: "superscript" }),
 			Superscript.extend({ excludes: "subscript" }),
 			EmDashTable.configure({
@@ -3980,10 +4091,16 @@ export function PortableTextEditor({
 		content: initialContent as Parameters<typeof useEditor>[0]["content"],
 		editable: editable && unsupportedMarks.length === 0 && tableConversionError === null,
 		immediatelyRender: true,
+		onBeforeCreate: ({ editor: instance }) =>
+			registerPluginBlocks(
+				instance as unknown as { storage: Record<string, Record<string, unknown>> },
+				pluginBlocks,
+			),
 		editorProps,
 		onUpdate: ({ editor: updatedEditor }) => reportChange(updatedEditor),
 	});
 
+	nestedEditorRef.current = editor;
 	/**
 	 * Takes the line the block insert button typed back out, or only its slash
 	 * from an empty line that was already there. While the line holds only the
@@ -4211,12 +4328,13 @@ export function PortableTextEditor({
 			id: string;
 			data: Record<string, unknown>;
 			pos: number;
+			item?: boolean;
 		}) => {
 			const blockDef = pluginBlocks.find((b) => b.type === attrs.blockType);
 			if (!blockDef) return;
 			editingBlockPosRef.current = attrs.pos;
 			setPluginBlockInitialValues({ id: attrs.id, ...attrs.data });
-			setPluginBlockModal(blockDef);
+			setPluginBlockModal(pluginBlockSettings(blockDef, attrs.item));
 		};
 		return () => {
 			storage.onEditBlock = null;
@@ -4256,6 +4374,17 @@ export function PortableTextEditor({
 	React.useEffect(() => {
 		if (!editor) return;
 		const follow = ({ transaction, appendedTransactions }: EditorEvents["transaction"]) => {
+			const editPosition = editingBlockPosRef.current;
+			if (editPosition !== null && editPosition >= 0) {
+				const mapped = [transaction, ...appendedTransactions].reduce(
+					(result, tr) => {
+						if (result.deleted) return result;
+						return tr.mapping.mapResult(result.pos, 1);
+					},
+					{ pos: editPosition, deleted: false },
+				);
+				editingBlockPosRef.current = mapped.deleted ? -1 : mapped.pos;
+			}
 			const position = pendingBlockInsertPosRef.current;
 			if (position === null) return;
 			pendingBlockInsertPosRef.current = [transaction, ...appendedTransactions].reduce(
@@ -4342,50 +4471,50 @@ export function PortableTextEditor({
 				// Use the chain API so TipTap's onUpdate fires reliably
 				// (raw view.dispatch may not trigger onUpdate for attribute-only
 				// changes on atom nodes in some TipTap versions).
-				editor
+				const updated = editor
 					.chain()
 					.command(({ tr }) => {
+						if (editPos < 0) return false;
 						const node = tr.doc.nodeAt(editPos);
-						if (node?.type.name === "pluginBlock") {
+						if (
+							node &&
+							["pluginBlock", "pluginContainer", "pluginContent"].includes(node.type.name) &&
+							node.attrs.blockType === pluginBlockModal.type
+						) {
 							tr.setNodeMarkup(editPos, undefined, {
 								...node.attrs,
 								id: typeof id === "string" ? id : node.attrs.id,
-								data,
+								data: { ...node.attrs.data, ...data },
 							});
 							return true;
 						}
 						return false;
 					})
 					.run();
-			} else {
-				// Inserting a new block
-				const content = {
-					type: "pluginBlock",
-					attrs: {
-						blockType: pluginBlockModal.type,
-						id: typeof id === "string" ? id : "",
-						data,
-					},
-				};
-				const insertPos = pendingBlockInsertPosRef.current;
-				const chain = editor.chain().focus();
-				if (insertPos === null) {
-					chain
-						.command(({ tr }) => prepareBlockInsert(tr))
-						.insertContent(content)
-						.scrollIntoView()
-						.run();
-				} else {
-					chain.insertContentAt(insertPos, content).run();
+				if (!updated) {
+					setPluginBlockError(
+						t`This component changed or was removed. Close settings and select it again.`,
+					);
+					return;
 				}
+			} else {
+				insertPluginBlock(
+					editor,
+					pluginBlockModal,
+					values,
+					pluginBlockTypes,
+					pluginBlocks,
+					pendingBlockInsertPosRef.current,
+				);
 			}
 
 			pendingBlockInsertPosRef.current = null;
 			setPluginBlockModal(null);
+			setPluginBlockError(null);
 			setPluginBlockInitialValues(undefined);
 			editingBlockPosRef.current = null;
 		},
-		[editor, pluginBlockModal],
+		[editor, pluginBlockModal, pluginBlocks, pluginBlockTypes, t],
 	);
 
 	React.useEffect(() => {
@@ -4440,7 +4569,11 @@ export function PortableTextEditor({
 				: [];
 			let prosemirrorContent: unknown[];
 			try {
-				({ content: prosemirrorContent } = portableTextToProsemirror(ptContent, pluginBlockTypes));
+				({ content: prosemirrorContent } = portableTextToProsemirror(
+					ptContent,
+					pluginBlockTypes,
+					pluginBlocks,
+				));
 			} catch (error) {
 				if (error instanceof UnsupportedPortableTextMarksError) {
 					setSectionInsertErrorMarks(error.marks);
@@ -4470,7 +4603,7 @@ export function PortableTextEditor({
 			}
 			pendingBlockInsertPosRef.current = null;
 		},
-		[editor, pluginBlockTypes],
+		[editor, pluginBlockTypes, pluginBlocks],
 	);
 
 	if (tableConversionError) {
@@ -4541,6 +4674,20 @@ export function PortableTextEditor({
 			<div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
 				{tableAnnouncement && <span key={tableAnnouncement.id}>{tableAnnouncement.text}</span>}
 			</div>
+			{nestedMediaError && (
+				<div
+					role="alert"
+					className="mb-3 rounded-lg border border-kumo-line bg-kumo-base p-4 text-sm"
+				>
+					{t`Media cannot be inserted inside components. Insert it in the main document instead.`}
+					<Button
+						variant="ghost"
+						size="sm"
+						className="ms-2"
+						onClick={() => setNestedMediaError(false)}
+					>{t`Dismiss`}</Button>
+				</div>
+			)}
 			{tablePasteError && (
 				<div
 					key={tablePasteError.id}
@@ -4714,10 +4861,12 @@ export function PortableTextEditor({
 				{/* Plugin block insertion/editing modal */}
 				<PluginBlockModal
 					block={pluginBlockModal}
+					error={pluginBlockError}
 					initialValues={pluginBlockInitialValues}
 					onClose={() => {
 						pendingBlockInsertPosRef.current = null;
 						setPluginBlockModal(null);
+						setPluginBlockError(null);
 						setPluginBlockInitialValues(undefined);
 						editingBlockPosRef.current = null;
 					}}
@@ -6392,7 +6541,7 @@ function EditorToolbar({
 				</ToolbarButton>
 				<ToolbarButton
 					onClick={onInsertImage}
-					disabled={editorState.isInTable}
+					disabled={editorState.isInTable || editor.isActive("pluginContent")}
 					title={t`Insert image`}
 				>
 					<ImageIcon className="h-4 w-4" aria-hidden="true" />
