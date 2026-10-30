@@ -23,7 +23,7 @@ import {
 } from "../content/portable-text-lists.js";
 import { getEditMeta } from "../query.js";
 // @ts-ignore - virtual module
-import { pluginBlockComponents } from "virtual:emdash/block-components";
+import { getPluginBlockComponents } from "virtual:emdash/block-components";
 import { emdashComponents } from "./index.js";
 import InlineEditor from "./InlineEditor.astro";
 import { groupBlockquoteRuns } from "./portable-text-blockquote-group.js";
@@ -46,7 +46,7 @@ const {
 const editMeta = getEditMeta(value);
 
 // Merge: EmDash defaults < Plugin block components < User components
-const withPlugins = mergeComponents(emdashComponents, { type: pluginBlockComponents });
+const withPlugins = mergeComponents(emdashComponents, { type: getPluginBlockComponents() });
 const mergedComponents = userComponents
 	? mergeComponents(withPlugins, userComponents)
 	: withPlugins;

@@ -460,7 +460,7 @@ export const mediaProviders = [
 export function generateBlockComponentsModule(descriptors: PluginDescriptor[]): string {
 	const withComponents = descriptors.filter((d) => d.componentsEntry);
 	if (withComponents.length === 0) {
-		return `export const pluginBlockComponents = {};`;
+		return `export function getPluginBlockComponents() { return {}; }`;
 	}
 
 	const imports: string[] = [];
@@ -470,7 +470,9 @@ export function generateBlockComponentsModule(descriptors: PluginDescriptor[]): 
 		spreads.push(`...bc${i}`);
 	});
 
-	return `${imports.join("\n")}\nexport const pluginBlockComponents = { ${spreads.join(", ")} };`;
+	// Plugin renderers can themselves import PortableText for nested bodies.
+	// Read their live exports at render time, after the import cycle has initialized.
+	return `${imports.join("\n")}\nexport function getPluginBlockComponents() { return { ${spreads.join(", ")} }; }`;
 }
 
 /**
