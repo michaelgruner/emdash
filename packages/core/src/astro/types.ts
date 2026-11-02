@@ -127,6 +127,11 @@ export interface ManifestPlugin {
 	}>;
 	/** Portable Text block types provided by this plugin */
 	portableTextBlocks?: Array<{
+		content?: {
+			field: string;
+			legacyField?: string;
+			items?: { field: string; label: string; titleField?: string };
+		};
 		type: string;
 		label: string;
 		icon?: string;

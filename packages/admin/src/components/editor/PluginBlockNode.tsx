@@ -32,6 +32,7 @@ import type { NodeViewProps } from "@tiptap/react";
 import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react";
 import * as React from "react";
 
+import { getRegistry } from "../../lib/plugin-content.js";
 import { cn } from "../../lib/utils";
 
 /**
@@ -50,6 +51,12 @@ export interface PluginBlockDef {
 	 * Optional display category in the slash menu. Defaults to "Embeds" when omitted.
 	 */
 	category?: string;
+	/** Editable Portable Text content, optionally inside repeating items. */
+	content?: {
+		field: string;
+		legacyField?: string;
+		items?: { field: string; label: string; titleField?: string };
+	};
 }
 
 // =============================================================================
@@ -69,14 +76,6 @@ export function registerPluginBlocks(
 	if (storage) {
 		storage.registry = registry;
 	}
-}
-
-/** Read the registry from editor storage */
-function getRegistry(editor: {
-	storage: Record<string, Record<string, unknown>>;
-}): Map<string, PluginBlockDef> {
-	const storage = editor.storage.pluginBlock;
-	return (storage?.registry as Map<string, PluginBlockDef>) ?? new Map();
 }
 
 /** Named icon map: icon key → React component */

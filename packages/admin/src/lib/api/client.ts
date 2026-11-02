@@ -234,6 +234,11 @@ export interface AdminManifest {
 			}>;
 			/** Block types for Portable Text editor */
 			portableTextBlocks?: Array<{
+				content?: {
+					field: string;
+					legacyField?: string;
+					items?: { field: string; label: string; titleField?: string };
+				};
 				type: string;
 				label: string;
 				icon?: string;

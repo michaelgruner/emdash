@@ -81,6 +81,74 @@ Use the Block Kit element shapes documented in [Block Kit](/plugins/creating-plu
 }
 ```
 
+## Edit rich content inline
+
+Native block definitions can declare a Portable Text content field with `content`. Authors edit that content in the admin's rich-text editor, using the same toolbar, slash menu, and undo history as the rest of the document. Other block options stay in the settings dialog.
+
+The following callout stores rich content in `body` and converts an existing plain-text `text` field when edited.
+
+```typescript title="src/index.ts"
+import type { PortableTextBlockConfig } from "emdash";
+
+const calloutBlock: PortableTextBlockConfig = {
+    type: "callout",
+    label: "Callout",
+    content: { field: "body", legacyField: "text" },
+    fields: [
+        { type: "text_input", action_id: "heading", label: "Heading" },
+    ],
+};
+```
+
+Add `calloutBlock` to `admin.portableTextBlocks`. The following renderer displays its rich content and keeps a plain-text fallback for entries that authors have not edited.
+
+```astro title="src/astro/Callout.astro"
+---
+import type { PortableTextBlock } from "emdash";
+import { PortableText } from "emdash/ui";
+
+interface Props {
+    node: { heading?: string; body?: PortableTextBlock[]; text?: string };
+}
+const { node } = Astro.props;
+---
+<aside>
+    {node.heading && <strong>{node.heading}</strong>}
+    {Array.isArray(node.body) ? <PortableText value={node.body} /> : <p>{node.text}</p>}
+</aside>
+```
+
+Plugin block renderers are available recursively inside `PortableText`.
+
+For repeating content, `content.items.field` names the repeating array. Each item stores its own Portable Text array in `content.field`. Keep the item's ordinary options in a matching `repeater` field definition.
+
+The following definition adds expandable sections whose headings are edited through item settings and whose rich content is edited inline.
+
+```typescript title="src/index.ts"
+import type { PortableTextBlockConfig } from "emdash";
+
+const sectionsBlock: PortableTextBlockConfig = {
+    type: "expandable-sections",
+    label: "Expandable sections",
+    content: {
+        field: "body",
+        items: { field: "sections", label: "Section", titleField: "heading" },
+    },
+    fields: [
+        {
+            type: "repeater",
+            action_id: "sections",
+            label: "Sections",
+            fields: [{ type: "text_input", action_id: "heading", label: "Heading" }],
+        },
+    ],
+}
+```
+
+The editor provides controls to add, reorder, and remove items, preserving their options and content together. `min_items` and `max_items` on the matching repeater control its add and remove buttons. When writing a paragraph, press Command+Enter on macOS or Ctrl+Enter elsewhere to continue after the nearest component.
+
+New images, videos, and galleries cannot be inserted inside components because nested media references are not tracked. Existing nested media stays in the document. Blocks without `content` retain their existing settings-based editing behavior.
+
 ## Add the Astro component
 
 <Steps>

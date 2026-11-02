@@ -159,7 +159,7 @@ declare module "virtual:emdash/sandboxed-plugins" {
 }
 
 declare module "virtual:emdash/block-components" {
-	export const pluginBlockComponents: Record<string, unknown>;
+	export function getPluginBlockComponents(): Record<string, unknown>;
 }
 
 declare module "virtual:emdash/auth-providers" {

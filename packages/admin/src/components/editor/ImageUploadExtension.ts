@@ -17,6 +17,7 @@ export interface ImageUploadOptions {
 	upload: ((file: File, signal: AbortSignal) => Promise<Record<string, unknown>>) | null;
 	/** Whether video files become video blocks, read when files are dropped or pasted. */
 	acceptsVideo: () => boolean;
+	onBlockedMedia: () => void;
 }
 
 type MediaKind = "image" | "video";
@@ -149,7 +150,7 @@ export const ImageUploadExtension = Extension.create<ImageUploadOptions, ImageUp
 	name: "imageUpload",
 
 	addOptions() {
-		return { upload: null, acceptsVideo: () => false };
+		return { upload: null, acceptsVideo: () => false, onBlockedMedia: () => {} };
 	},
 
 	addStorage() {
@@ -224,6 +225,13 @@ export const ImageUploadExtension = Extension.create<ImageUploadOptions, ImageUp
 		};
 
 		const start = (view: EditorView, files: File[], dropPos: number) => {
+			const $drop = view.state.doc.resolve(dropPos);
+			for (let depth = $drop.depth; depth > 0; depth--) {
+				if ($drop.node(depth).type.name !== "pluginContent") continue;
+				this.options.onBlockedMedia();
+				return;
+			}
+
 			const pos = blockBoundary(view.state.doc, dropPos);
 			const media = files.flatMap((file) => {
 				const kind = kindOf(view, file);

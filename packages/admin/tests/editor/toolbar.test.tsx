@@ -1998,7 +1998,11 @@ describe("Link Insertion", () => {
 		const modUp = navigator.platform.includes("Mac") ? "{/Meta}" : "{/Control}";
 		await userEvent.keyboard(`${mod}{a}${modUp}`);
 
-		screen.getByRole("button", { name: "Edit link" }).element().click();
+		screen
+			.getByRole("toolbar", { name: "Text formatting" })
+			.getByRole("button", { name: "Edit link" })
+			.element()
+			.click();
 
 		await vi.waitFor(() => {
 			expect(screen.getByRole("button", { name: "Remove" })).toBeTruthy();
